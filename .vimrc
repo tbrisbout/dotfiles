@@ -10,6 +10,9 @@ call vundle#rc()
 " required! 
 Bundle 'gmarik/vundle'
 
+" My Bundles
+Bundle 'kien/ctrlp.vim'
+
 filetype plugin indent on       " load file type plugins + indentation
 
 syntax enable
