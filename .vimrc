@@ -1,7 +1,19 @@
 set nocompatible                " choose no compatibility with legacy vi
+filetype off                    " required!
+
+" Vundle (Plugin Management)
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+
+filetype plugin indent on       " load file type plugins + indentation
+
 syntax enable
 set encoding=utf-8
-filetype plugin indent on       " load file type plugins + indentation
 
 "" Whitespace
 set nowrap                      " don't wrap lines
