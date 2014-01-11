@@ -12,6 +12,7 @@ Bundle 'gmarik/vundle'
 
 " My Bundles
 Bundle 'kien/ctrlp.vim'
+Bundle 'bling/vim-airline'
 
 filetype plugin indent on       " load file type plugins + indentation
 
@@ -33,6 +34,7 @@ set smartcase                   " ... unless they contain at least one capital l
 "" Status Bar
 set ruler		                    " show the cursor position all the time
 set showcmd                     " display incomplete commands
+set laststatus=2                " show status line all the time
 
 "" UI Stuff
 set number                      " Display line number
