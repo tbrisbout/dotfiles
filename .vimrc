@@ -13,11 +13,25 @@ Bundle 'gmarik/vundle'
 " My Bundles
 Bundle 'kien/ctrlp.vim'
 Bundle 'bling/vim-airline'
+Bundle 'altercation/vim-colors-solarized'
+
 
 filetype plugin indent on       " load file type plugins + indentation
 
 syntax enable
 set encoding=utf-8
+
+" solarized scheme
+if has('gui_running')
+  set background=light
+else
+  set background=dark
+endif
+
+set t_Co=16
+let g:solarized_termcolors=16
+colorscheme solarized
+
 
 "" Whitespace
 set nowrap                      " don't wrap lines
