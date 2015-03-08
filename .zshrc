@@ -6,10 +6,11 @@ export ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="ys"
-
+export DEFAULT_USER=tb3
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias vim='mvim -v'
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -48,7 +49,7 @@ ZSH_THEME="ys"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git mvn colored-man)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -72,3 +73,24 @@ export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+# Proxy setting
+[ -f ~/.proxy ] && source ~/.proxy
+
+alias mvn=mvn-color
+
+# Use Ctrl-z to switch between vim and cli
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="fg"
+    zle accept-line
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
+
+# Avoid changing window name in tmux
+DISABLE_AUTO_TITLE="true"
