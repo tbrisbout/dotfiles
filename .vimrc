@@ -4,37 +4,38 @@ filetype off                    " required!
 " Vundle (Plugin Management)
 
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#rc()
+call vundle#begin()
 
 " let Vundle manage Vundle
 " required!
-Bundle 'gmarik/Vundle.vim'
-Bundle 'kien/ctrlp.vim'
-Bundle 'bling/vim-airline'
-Bundle 'blueeyed/vim-colors-solarized'
-Bundle 'wookiehangover/jshint.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'antlypls/vim-colors-codeschool'
-Bundle 'geekjuice/vim-mocha'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'tpope/vim-fugitive'
-Bundle 'sirver/ultisnips'
-Bundle 'honza/vim-snippets'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'marijnh/tern_for_vim'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'majutsushi/tagbar'
-Bundle 'cohama/lexima.vim'
-Bundle 'alvan/vim-closetag'
-Bundle 'digitaltoad/vim-jade'
-Bundle 'wavded/vim-stylus'
-Bundle 'editorconfig/editorconfig-vim'
-Bundle 'ryanoasis/vim-webdevicons'
-Bundle 'tpope/vim-commentary'
-Bundle 'moll/vim-node'
-Bundle 'calebsmith/vim-lambdify'
-Bundle 'jelera/vim-javascript-syntax'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'bling/vim-airline'
+Plugin 'blueeyed/vim-colors-solarized'
+Plugin 'wookiehangover/jshint.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'antlypls/vim-colors-codeschool'
+Plugin 'geekjuice/vim-mocha'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
+Plugin 'sirver/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'marijnh/tern_for_vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'majutsushi/tagbar'
+Plugin 'cohama/lexima.vim'
+Plugin 'alvan/vim-closetag'
+Plugin 'digitaltoad/vim-jade'
+Plugin 'wavded/vim-stylus'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'ryanoasis/vim-webdevicons'
+Plugin 'tpope/vim-commentary'
+Plugin 'moll/vim-node'
+Plugin 'calebsmith/vim-lambdify'
+Plugin 'jelera/vim-javascript-syntax'
 
+call vundle#end()
 filetype plugin indent on       " load file type plugins + indentation
 
 syntax enable
