@@ -33,6 +33,7 @@ Bundle 'ryanoasis/vim-webdevicons'
 Bundle 'tpope/vim-commentary'
 Bundle 'moll/vim-node'
 Bundle 'calebsmith/vim-lambdify'
+Bundle 'jelera/vim-javascript-syntax'
 
 filetype plugin indent on       " load file type plugins + indentation
 
@@ -63,6 +64,9 @@ set hlsearch                    " highlight matches
 set incsearch                   " incremental searching
 set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
+
+set grepprg=ag\ --nogroup\ --nocolor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 "" Status Bar
 set ruler                       " show the cursor position all the time
@@ -134,6 +138,7 @@ nmap <leader>bd :bd<CR>
 " Exit insert mode faster
 inoremap jj <Esc>
 inoremap jk <Esc>:w<CR>
+inoremap j; <Esc>m`A;<Esc>``
 
 " Clear search highlight
 nmap <Leader><Leader> :noh<CR>
