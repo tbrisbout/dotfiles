@@ -152,7 +152,7 @@ let g:NERDTreeMapActivateNode="<F3>"
 let g:NERDTreeMapPreview="<F4>"
 
 " Path ignore (wildmenu, ctrlp..)
-set wildignore+=*/.git/*,*/node_modules/*,*/bower_components/*
+set wildignore+=*/.git/*,*/node_modules/*,*/bower_components/*,*/dist/*
 
 " AutoCorrect typos in Insert Mode
 iabbrev lenght length
