@@ -10,7 +10,6 @@ export DEFAULT_USER=tb3
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim='mvim -v'
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -49,13 +48,15 @@ alias vim='mvim -v'
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git mvn colored-man)
+plugins=(git colored-man)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
 export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
+export TERM="screen-256color"
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -63,7 +64,7 @@ export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
+export EDITOR='vim'
 # else
 #   export EDITOR='mvim'
 # fi
@@ -76,8 +77,6 @@ export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
 
 # Proxy setting
 [ -f ~/.proxy ] && source ~/.proxy
-
-alias mvn=mvn-color
 
 # Use Ctrl-z to switch between vim and cli
 fancy-ctrl-z () {
@@ -94,3 +93,10 @@ bindkey '^Z' fancy-ctrl-z
 
 # Avoid changing window name in tmux
 DISABLE_AUTO_TITLE="true"
+
+# use node executable without installing them global
+if echo $PATH | grep node_modules/.bin >/dev/null 2>/dev/null; then
+     true
+else
+    export PATH="$PATH:node_modules/.bin:$HOME/bin"
+fi
