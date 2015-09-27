@@ -34,6 +34,8 @@ Plugin 'tpope/vim-commentary'
 Plugin 'moll/vim-node'
 Plugin 'calebsmith/vim-lambdify'
 Plugin 'jelera/vim-javascript-syntax'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'elzr/vim-json'
 
 call vundle#end()
 filetype plugin indent on       " load file type plugins + indentation
@@ -41,16 +43,8 @@ filetype plugin indent on       " load file type plugins + indentation
 syntax enable
 set encoding=utf-8
 
-" solarized scheme
-if has('gui_running')
-  set background=light
-  set guifont=Monaco\ for\ Powerline:h14
-else
-  set background=dark
-endif
-
-set t_Co=16
-colorscheme solarized
+colorscheme Monokai
+let g:airline_theme='tomorrow'
 
 
 "" Whitespace
@@ -81,13 +75,11 @@ endif
 
 " Buffer Top bar
 let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#left_sep = ' '
-" let g:airline#extensions#tabline#left_alt_sep = '|'
-" let g:airline#extensions#tabline#fnamemod = ':t'
 
 "" GUI Stuff
 set number                      " Display line number
 set showmatch                   " Show matching brackets.
+set cursorline
 
 " Avoid backup files~
 set nobackup
@@ -121,11 +113,7 @@ nmap <Leader>c gcc
 vmap <Leader>c gc
 
 let g:UltiSnipsExpandTrigger="<c-l>"
-
-" run mocha specs
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
 
 " Move to the next buffer
 nnoremap <leader>l :bnext<CR>
@@ -151,6 +139,11 @@ silent! map <F3> :NERDTreeFind<CR>
 let g:NERDTreeMapActivateNode="<F3>"
 let g:NERDTreeMapPreview="<F4>"
 
+" Move to prev / next change
+silent! nmap <Leader>gn :GitGutterNextHunk<CR>
+silent! nmap <Leader>gp :GitGutterPrevHunk<CR>
+silent! nmap <Leader>gr :GitGutterRevertHunk<CR>
+
 " Path ignore (wildmenu, ctrlp..)
 set wildignore+=*/.git/*,*/node_modules/*,*/bower_components/*,*/dist/*
 
@@ -160,7 +153,6 @@ iabbrev heigth height
 iabbrev widht width
 iabbrev fucntion function
 iabbrev funciton function
-iabbrev clog console.log
 
 augroup vimrc_autocmds
   autocmd BufNewFile,BufRead *.md set filetype=markdown
