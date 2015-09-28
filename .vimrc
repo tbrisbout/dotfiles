@@ -147,6 +147,11 @@ silent! nmap <Leader>gr :GitGutterRevertHunk<CR>
 " Path ignore (wildmenu, ctrlp..)
 set wildignore+=*/.git/*,*/node_modules/*,*/bower_components/*,*/dist/*
 
+" Escape to Normal mode in Nvim terminal
+if has('nvim')
+  tnoremap <Esc> <C-\><C-n>
+endif
+
 " AutoCorrect typos in Insert Mode
 iabbrev lenght length
 iabbrev heigth height
