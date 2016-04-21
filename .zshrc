@@ -100,3 +100,6 @@ if echo $PATH | grep node_modules/.bin >/dev/null 2>/dev/null; then
 else
     export PATH="$PATH:node_modules/.bin:$HOME/bin"
 fi
+
+export NVM_DIR="/home/thomas/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
