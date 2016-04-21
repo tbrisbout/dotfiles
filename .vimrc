@@ -9,10 +9,9 @@ call vundle#begin()
 " let Vundle manage Vundle
 " required!
 Plugin 'gmarik/Vundle.vim'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'bling/vim-airline'
-Plugin 'blueeyed/vim-colors-solarized'
-Plugin 'wookiehangover/jshint.vim'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'
 Plugin 'antlypls/vim-colors-codeschool'
 Plugin 'geekjuice/vim-mocha'
@@ -32,18 +31,25 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'ryanoasis/vim-webdevicons'
 Plugin 'tpope/vim-commentary'
 Plugin 'moll/vim-node'
-Plugin 'calebsmith/vim-lambdify'
+Plugin 'pangloss/vim-javascript'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'elzr/vim-json'
+
+Plugin 'elixir-lang/vim-elixir'
+
+Plugin 'tbrisbout/vim-babeljs'
+Plugin 'scrooloose/syntastic'
+
+Plugin 'elmcast/elm-vim'
 
 call vundle#end()
 filetype plugin indent on       " load file type plugins + indentation
 
 syntax enable
-set encoding=utf-8
+" set encoding=utf-8
 
-colorscheme Monokai
+colorscheme Tomorrow-Night-Eighties
 let g:airline_theme='tomorrow'
 
 
@@ -52,7 +58,7 @@ set nowrap                      " don't wrap lines
 set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
-set list listchars=trail:·
+set list listchars=trail:·,tab:▸\ ,nbsp:·
 
 "" Searching
 set hlsearch                    " highlight matches
@@ -62,6 +68,7 @@ set smartcase                   " ... unless they contain at least one capital l
 
 set grepprg=ag\ --nogroup\ --nocolor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap <Leader>f :grep!<SPACE>
 
 "" Status Bar
 set ruler                       " show the cursor position all the time
@@ -74,32 +81,57 @@ if !exists('g:airline_symbols')
 endif
 
 " Buffer Top bar
-let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
 
 "" GUI Stuff
 set number                      " Display line number
 set showmatch                   " Show matching brackets.
 set cursorline
+set splitbelow                 " More natural split
+
+"" JS concealing
+set conceallevel=0
+" set concealcursor=nvic
+" highlight Conceal cterm=bold ctermbg=NONE ctermfg=67
+" JavaScript thanks to pangloss/vim-javascript
+let g:javascript_conceal_function = "λ"
+let g:javascript_conceal_this = "@"
+let g:javascript_conceal_return = "«"
+let g:javascript_conceal_prototype = "#"
+
+let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_eslint_exec = './node_modules/gulp-eslint/node_modules/eslint/bin/eslint.js'
+let g:syntastic_javascript_eslint_exec = './node_modules/.bin/eslint'
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+
+
+" Elm stuff
+let g:elm_format_autosave = 1
 
 " Avoid backup files~
 set nobackup
 set noswapfile
 set nowb
 
+set autoread
 set hidden
 
 " Keyboards Shortcuts
 set mouse=a
 let mapleader = " "
-vmap <Leader>y "+y
-vmap <Leader>d "+d
-nmap <Leader>p "+p
-nmap <Leader>P "+P
-vmap <Leader>p "+p
-vmap <Leader>P "+P
+vnoremap <Leader>y "+y
+vnoremap <Leader>d "+d
+nnoremap <Leader>p "+p
+nnoremap <Leader>P "+P
+vnoremap <Leader>p "+p
+vnoremap <Leader>P "+P
 nnoremap <Leader>o o<Esc>k
 nnoremap <Leader>O O<Esc>j
 nnoremap <Leader>w :w<CR>
+
+nnoremap <leader>r :make<cr>
 
 " insert comma / semicolon at end of line
 nnoremap <Leader>, m`A,<Esc>``
@@ -113,16 +145,19 @@ nmap <Leader>c gcc
 vmap <Leader>c gc
 
 let g:UltiSnipsExpandTrigger="<c-l>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
 
 " Move to the next buffer
 nnoremap <leader>l :bnext<CR>
 
 " Move to the previous buffer
-nmap <leader>h :bprevious<CR>
+nnoremap <leader>h :bprevious<CR>
 
 " Delete current buffer
-nmap <leader>bd :bd<CR>
+nnoremap <leader>bd :bd<CR>
+
+" Open buffer list
+nnoremap <leader><leader> :CtrlPBuffer<cr>
 
 " Exit insert mode faster
 inoremap jj <Esc>
@@ -130,7 +165,7 @@ inoremap jk <Esc>:w<CR>
 inoremap j; <Esc>m`A;<Esc>``
 
 " Clear search highlight
-nmap <Leader><Leader> :noh<CR>
+nnoremap <Leader>noh :noh<CR>
 
 " Test with NERDTree
 silent! nmap <F2> :NERDTreeToggle<CR>
@@ -140,9 +175,9 @@ let g:NERDTreeMapActivateNode="<F3>"
 let g:NERDTreeMapPreview="<F4>"
 
 " Move to prev / next change
-silent! nmap <Leader>gn :GitGutterNextHunk<CR>
-silent! nmap <Leader>gp :GitGutterPrevHunk<CR>
-silent! nmap <Leader>gr :GitGutterRevertHunk<CR>
+silent! nnoremap <Leader>gn :GitGutterNextHunk<CR>
+silent! nnoremap <Leader>gp :GitGutterPrevHunk<CR>
+silent! nnoremap <Leader>gr :GitGutterRevertHunk<CR>
 
 " Path ignore (wildmenu, ctrlp..)
 set wildignore+=*/.git/*,*/node_modules/*,*/bower_components/*,*/dist/*
@@ -160,12 +195,13 @@ iabbrev fucntion function
 iabbrev funciton function
 
 augroup vimrc_autocmds
+  autocmd!
   autocmd BufNewFile,BufRead *.md set filetype=markdown
   autocmd Filetype gitcommit highlight OverLength ctermbg=red guibg=#592929
   autocmd Filetype gitcommit match OverLength /\%72v.*/
   autocmd Filetype xls setlocal noexpandtab
   autocmd BufEnter * set completeopt-=preview
-  autocmd BufNewFile *.js exe "normal O'use strict';"
-  autocmd FileType javascript nnoremap <Leader>r :!node "%:p"<CR>
-  autocmd FileType javascript set makeprg=node\ %
+  autocmd FileType javascript nnoremap <buffer> <Leader>r :!node --harmony-proxies "%:p"<CR>
+  autocmd FileType javascript setlocal makeprg=node\ %
+  autocmd Filetype elm setlocal makeprg=elm-make\ %
 augroup END
