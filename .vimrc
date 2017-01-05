@@ -1,49 +1,37 @@
 set nocompatible                " choose no compatibility with legacy vi
 filetype off                    " required!
 
-" Vundle (Plugin Management)
+call plug#begin('~/.vim/plugged')
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+Plug 'majutsushi/tagbar'
+Plug 'cohama/lexima.vim'
+Plug 'alvan/vim-closetag'
+Plug 'editorconfig/editorconfig-vim'
+" Plug 'ryanoasis/vim-webdevicons'
+Plug 'tpope/vim-commentary'
+Plug 'geekjuice/vim-mocha', { 'for': 'javascript' }
+Plug 'moll/vim-node', { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
+Plug 'tbrisbout/vim-babeljs', { 'for': 'javascript' }
+Plug 'flazz/vim-colorschemes'
+Plug 'elzr/vim-json', { 'for': 'json' }
 
-" let Vundle manage Vundle
-" required!
-Plugin 'gmarik/Vundle.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'scrooloose/nerdtree'
-Plugin 'antlypls/vim-colors-codeschool'
-Plugin 'geekjuice/vim-mocha'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
-Plugin 'sirver/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'marijnh/tern_for_vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'majutsushi/tagbar'
-Plugin 'cohama/lexima.vim'
-Plugin 'alvan/vim-closetag'
-Plugin 'digitaltoad/vim-jade'
-Plugin 'wavded/vim-stylus'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'ryanoasis/vim-webdevicons'
-Plugin 'tpope/vim-commentary'
-Plugin 'moll/vim-node'
-Plugin 'pangloss/vim-javascript'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'elzr/vim-json'
+Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
+Plug 'scrooloose/syntastic'
+Plug 'elmcast/elm-vim', { 'for': 'elm' }
 
-Plugin 'elixir-lang/vim-elixir'
-
-Plugin 'tbrisbout/vim-babeljs'
-Plugin 'scrooloose/syntastic'
-
-Plugin 'elmcast/elm-vim'
-
-call vundle#end()
+call plug#end()
 filetype plugin indent on       " load file type plugins + indentation
 
 syntax enable
