@@ -75,7 +75,8 @@ let g:airline_right_sep=''
 set number                      " Display line number
 set showmatch                   " Show matching brackets.
 set cursorline
-set splitbelow                 " More natural split
+set splitbelow splitright       " More natural split
+set relativenumber
 
 "" JS concealing
 set conceallevel=0
@@ -88,7 +89,6 @@ let g:javascript_conceal_return = "«"
 let g:javascript_conceal_prototype = "#"
 
 let g:syntastic_javascript_checkers = ['eslint']
-" let g:syntastic_javascript_eslint_exec = './node_modules/gulp-eslint/node_modules/eslint/bin/eslint.js'
 let g:syntastic_javascript_eslint_exec = './node_modules/.bin/eslint'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -171,6 +171,8 @@ silent! nnoremap <Leader>gn :GitGutterNextHunk<CR>
 silent! nnoremap <Leader>gp :GitGutterPrevHunk<CR>
 silent! nnoremap <Leader>gr :GitGutterRevertHunk<CR>
 
+set wildmenu
+set wildmode=list:longest,list
 " Path ignore (wildmenu, ctrlp..)
 set wildignore+=*/.git/*,*/node_modules/*,*/bower_components/*,*/dist/*
 
