@@ -67,18 +67,18 @@ set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
 
 set grepprg=ag\ --nogroup\ --nocolor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-nnoremap <Leader>f :grep!<SPACE>
 
 "" Status Bar
 set ruler                       " show the cursor position all the time
 set showcmd                     " display incomplete commands
 set laststatus=2                " show status line all the time
-let g:airline_powerline_fonts=1
+" let g:airline_powerline_fonts=1
 
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
+" if !exists('g:airline_symbols')
+"   let g:airline_symbols = {}
+" endif
+let g:airline_left_sep=''
+let g:airline_right_sep=''
 
 " Buffer Top bar
 " let g:airline#extensions#tabline#enabled = 1
@@ -163,6 +163,10 @@ nnoremap <leader><leader> :CtrlPBuffer<cr>
 inoremap jj <Esc>
 inoremap jk <Esc>:w<CR>
 inoremap j; <Esc>m`A;<Esc>``
+
+" faster search
+nnoremap <leader>f :grep!<SPACE>
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " Clear search highlight
 nnoremap <Leader>noh :noh<CR>
