@@ -125,6 +125,9 @@ nnoremap <leader>r :make<cr>
 nnoremap <Leader>, m`A,<Esc>``
 nnoremap <Leader>; m`A;<Esc>``
 
+" open es module import
+nnoremap <Leader>gf 0f'gf
+
 " visually select a function (WIP)
 nnoremap <Leader>vf va{V
 
