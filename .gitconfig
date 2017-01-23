@@ -1,0 +1,16 @@
+[user]
+	email = thomas.brisbout@gmail.com
+	name = Thomas BRISBOUT
+[push]
+	default = simple
+[alias]
+	st = status
+	s = status -s
+	co = checkout
+	ci = commit
+	amend = commit --amend
+	aa = add -A
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	last = log -1
+	br = branch
+	dif = diff --color-words=.
