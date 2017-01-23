@@ -121,6 +121,11 @@ nnoremap <Leader>w :w<CR>
 
 nnoremap <leader>r :make<cr>
 
+" next/prev entry in location list (e.g. syntastic issue)
+" n and N mimic behavior of * word search
+nnoremap <leader>n :lnext<cr>
+nnoremap <leader>N :lprev<cr>
+
 " insert comma / semicolon at end of line
 nnoremap <Leader>, m`A,<Esc>``
 nnoremap <Leader>; m`A;<Esc>``
