@@ -1,6 +1,6 @@
 export ZSH=$HOME/.oh-my-zsh
 
-source $HOME/antigen.zsh
+source $HOME/bin/scripts/antigen.zsh
 local b="antigen-bundle"
 
 antigen use oh-my-zsh
