@@ -7,6 +7,7 @@ antigen use oh-my-zsh
 antigen theme "robbyrussell"
 
 $b git
+$b tmuxinator
 $b zsh-users/zsh-autosuggestions
 $b zsh-users/zsh-syntax-highlighting
 $b lukechilds/zsh-better-npm-completion
