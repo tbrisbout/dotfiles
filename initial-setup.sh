@@ -15,7 +15,7 @@ sudo apt-get install -y vim git tree curl xclip tmux \
   zsh zsh-antigen silversearcher-ag \
   cmake build-essential python-dev \ # YouCompleteMe compile dependencies
   jq \
-  vlc \
+  vlc gimp \
   gnome-tweak-tool # Used for mapping CapsLock to Control
 
 # Create bin dir & scripts
