@@ -180,7 +180,7 @@ silent! nnoremap <Leader>gp :GitGutterPrevHunk<CR>
 silent! nnoremap <Leader>gr :GitGutterRevertHunk<CR>
 
 set wildmenu
-set wildmode=list:longest,list
+set wildmode=list:longest,full
 " Path ignore (wildmenu, ctrlp..)
 set wildignore+=*/.git/*,*/node_modules/*,*/bower_components/*,*/dist/*
 
