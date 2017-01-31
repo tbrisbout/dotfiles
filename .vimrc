@@ -97,6 +97,8 @@ let g:syntastic_check_on_open = 1
 
 " Elm stuff
 let g:elm_format_autosave = 1
+let g:elm_syntastic_show_warnings = 1
+let g:ycm_semantic_triggers = { 'elm' : ['.'] }
 
 " Avoid backup files~
 set nobackup
