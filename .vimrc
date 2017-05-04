@@ -1,45 +1,61 @@
 set nocompatible                " choose no compatibility with legacy vi
+set encoding=utf-8
 filetype off                    " required!
 
 call plug#begin('~/.vim/plugged')
 
+" UI Plugins
+Plug 'tyrannicaltoucan/vim-quantum', { 'commit': '18be01e' }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
+
+" Git
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+
+" Snippets
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'epilande/vim-es2015-snippets'
+Plug 'epilande/vim-react-snippets'
+
+" Autocomplete
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
-Plug 'majutsushi/tagbar'
-Plug 'cohama/lexima.vim'
-Plug 'alvan/vim-closetag'
+
+" Misc
 Plug 'editorconfig/editorconfig-vim'
-" Plug 'ryanoasis/vim-webdevicons'
 Plug 'tpope/vim-commentary'
-Plug 'geekjuice/vim-mocha', { 'for': 'javascript' }
+Plug 'scrooloose/syntastic'
+
+" JS
 Plug 'moll/vim-node', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
 Plug 'tbrisbout/vim-babeljs', { 'for': 'javascript' }
-Plug 'flazz/vim-colorschemes'
+Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 
+" Languages Utils
 Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
-Plug 'scrooloose/syntastic'
 Plug 'elmcast/elm-vim', { 'for': 'elm' }
+Plug 'cohama/lexima.vim'
+Plug 'alvan/vim-closetag'
+
+" Writing
+Plug 'reedes/vim-wordy', { 'for': 'markdown' }
+Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+Plug 'junegunn/limelight.vim', { 'for': 'markdown' }
 
 call plug#end()
 filetype plugin indent on       " load file type plugins + indentation
 
 syntax enable
-" set encoding=utf-8
 
-colorscheme Tomorrow-Night-Eighties
-let g:airline_theme='tomorrow'
-
+colorscheme quantum
+let g:airline_theme='quantum'
 
 "" Whitespace
 set nowrap                      " don't wrap lines
@@ -60,16 +76,8 @@ set grepprg=ag\ --nogroup\ --nocolor
 set ruler                       " show the cursor position all the time
 set showcmd                     " display incomplete commands
 set laststatus=2                " show status line all the time
-" let g:airline_powerline_fonts=1
-
-" if !exists('g:airline_symbols')
-"   let g:airline_symbols = {}
-" endif
 let g:airline_left_sep=''
 let g:airline_right_sep=''
-
-" Buffer Top bar
-" let g:airline#extensions#tabline#enabled = 1
 
 "" GUI Stuff
 set number                      " Display line number
@@ -78,22 +86,13 @@ set cursorline
 set splitbelow splitright       " More natural split
 set relativenumber
 
-"" JS concealing
-set conceallevel=0
-" set concealcursor=nvic
-" highlight Conceal cterm=bold ctermbg=NONE ctermfg=67
-" JavaScript thanks to pangloss/vim-javascript
-let g:javascript_conceal_function = "λ"
-let g:javascript_conceal_this = "@"
-let g:javascript_conceal_return = "«"
-let g:javascript_conceal_prototype = "#"
-
+" Linting
+let g:jsx_ext_required = 0
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = './node_modules/.bin/eslint'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
-
 
 " Elm stuff
 let g:elm_format_autosave = 1
@@ -108,15 +107,20 @@ set nowb
 set autoread
 set hidden
 
+let g:closetag_filenames = '*.html,*.xml,*.js'
+
 " Keyboards Shortcuts
 set mouse=a
 let mapleader = " "
+
+" Copy / Paste
 vnoremap <Leader>y "+y
 vnoremap <Leader>d "+d
 nnoremap <Leader>p "+p
 nnoremap <Leader>P "+P
 vnoremap <Leader>p "+p
 vnoremap <Leader>P "+P
+
 nnoremap <Leader>o o<Esc>k
 nnoremap <Leader>O O<Esc>j
 nnoremap <Leader>w :w<CR>
@@ -137,6 +141,10 @@ nnoremap <Leader>gf 0f'gf
 
 " visually select a function (WIP)
 nnoremap <Leader>vf va{V
+
+" wrap visual selection with console.log
+vnoremap <leader>log cconsole.log()<esc>P
+vnoremap <leader>lg c(console.log(<esc>pa), )<esc>P
 
 " insert comment at beginning
 nmap <Leader>c gcc
@@ -198,14 +206,19 @@ iabbrev widht width
 iabbrev fucntion function
 iabbrev funciton function
 
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
 augroup vimrc_autocmds
   autocmd!
   autocmd BufNewFile,BufRead *.md set filetype=markdown
+  autocmd BufNewFile,BufRead .{babel,eslint}rc set filetype=json
+
   autocmd Filetype gitcommit highlight OverLength ctermbg=red guibg=#592929
   autocmd Filetype gitcommit match OverLength /\%72v.*/
+
   autocmd Filetype xls setlocal noexpandtab
   autocmd BufEnter * set completeopt-=preview
-  autocmd FileType javascript nnoremap <buffer> <Leader>r :!node --harmony-proxies "%:p"<CR>
   autocmd FileType javascript setlocal makeprg=node\ %
   autocmd Filetype elm setlocal makeprg=elm-make\ %
 augroup END
