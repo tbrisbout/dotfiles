@@ -9,11 +9,25 @@
 # - Use RightAlt as ComposeKey
 # - Set vlc as default video app
 
+# Add docker apt repository
+sudo apt-get -y install \
+  apt-transport-https \
+  ca-certificates \
+  curl
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+sudo add-apt-repository \
+  "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) \
+  stable"
+
 # Software install
 sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get install -y vim git tree curl xclip tmux \
   zsh zsh-antigen silversearcher-ag \
   cmake build-essential python-dev \ # YouCompleteMe compile dependencies
+  docker-ce \
   jq \
   vlc gimp \
   gnome-tweak-tool # Used for mapping CapsLock to Control
@@ -59,3 +73,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 # Install vim plugins
 vim +PlugInstall +qall
+
+# Docker Group (use docker without sudo)
+sudo groupadd docker
+sudo usermod -aG docker $USER
