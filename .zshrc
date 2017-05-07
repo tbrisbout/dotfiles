@@ -11,6 +11,7 @@ $b tmuxinator
 $b zsh-users/zsh-autosuggestions
 $b zsh-users/zsh-syntax-highlighting
 $b lukechilds/zsh-better-npm-completion
+$b greymd/docker-zsh-completion
 
 antigen apply
 

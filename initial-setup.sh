@@ -32,6 +32,11 @@ sudo apt-get install -y vim git tree curl xclip tmux \
   vlc gimp \
   gnome-tweak-tool # Used for mapping CapsLock to Control
 
+# install docker-compose
+sudo curl -L https://github.com/docker/compose/releases/download/1.13.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+sudo chmod u+x /usr/local/bin/docker-compose
+
+
 # Create bin dir & scripts
 mkdir -p ~/bin/scripts
 
