@@ -14,3 +14,4 @@
 	last = log -1
 	br = branch
 	dif = diff --color-words=.
+	gh-pages = subtree push --prefix dist origin gh-pages
