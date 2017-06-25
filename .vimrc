@@ -192,7 +192,7 @@ silent! nnoremap <Leader>gr :GitGutterRevertHunk<CR>
 set wildmenu
 set wildmode=list:longest,full
 " Path ignore (wildmenu, ctrlp..)
-set wildignore+=*/.git/*,*/node_modules/*,*/bower_components/*,*/dist/*
+set wildignore+=*/.git/*,*/node_modules/*,*/bower_components/*,*/dist/*,*/elm-stuff/*
 
 " Escape to Normal mode in Nvim terminal
 if has('nvim')
