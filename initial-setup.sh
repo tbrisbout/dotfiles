@@ -29,7 +29,7 @@ sudo apt-get install -y vim git tree curl xclip tmux \
   cmake build-essential python-dev \ # YouCompleteMe compile dependencies
   docker-ce \
   jq \
-  vlc gimp \
+  vlc gimp openshot \
   gnome-tweak-tool # Used for mapping CapsLock to Control
 
 # install docker-compose
