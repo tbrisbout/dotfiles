@@ -57,3 +57,6 @@ rbenv global 2.2.3
 export NVM_DIR="/home/thomas/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 nvm use --silent --lts
+
+# Configure keyboard in console (CapsLock as Ctrl and RightAlt as Compose)
+setxkbmap -option ctrl:nocaps -option compose:ralt
