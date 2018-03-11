@@ -180,6 +180,10 @@ install_nvm_and_node() {
   fi
 }
 
+install_elm() {
+  npm install -s -g elm elm-test elm-oracle elm-format > /dev/null
+}
+
 install_rbenv_and_ruby() {
   sudo apt-get install -y rbenv ruby-build
   rbenv install 2.2.3
@@ -226,8 +230,9 @@ main() {
   install_shell
   setup_dotfiles
 
-  log_step 5 "Install Node.js"
+  log_step 5 "Install Node.js & elm"
   install_nvm_and_node
+  install_elm
 
   # TODO: verify rbenv install issues of find tmuxinator alternative
   # install_rbenv_and_ruby
