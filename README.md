@@ -7,5 +7,5 @@ My dotfiles repository - use vim, tmux, tmuxinator, nvm, rbenv...
 
 Run the following script on an empty Ubuntu Install:
 ```sh
-wget -qO- https://raw.githubusercontent.com/tbrisbout/dotfiles/master/initial-setup.sh | bash
+wget -qO- https://raw.githubusercontent.com/tbrisbout/dotfiles/master/setup | bash
 ```
