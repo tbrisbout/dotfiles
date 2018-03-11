@@ -6,9 +6,8 @@ set -o pipefail
 log_step() {
   local step_number="$1"
   local message="$2"
-  local CLEAR_LINE='\r\033[K'
   # shellcheck disable=SC2059
-  printf "${CLEAR_LINE}[${step_number}/6] ==> ${message}"
+  printf "[${step_number}/6] ==> ${message}\n"
 }
 
 log_ok() {
@@ -87,14 +86,16 @@ install_dev_tools() {
     zsh \
     zsh-antigen \
     silversearcher-ag \
-    jq
+    jq \
+  > /dev/null
 }
 
 install_desktop_tools() {
   sudo apt-get install -qq -y \
     vlc \
     gimp \
-    openshot
+    openshot \
+  > /dev/null
 }
 
 install_ohmyzsh() {
