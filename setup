@@ -16,7 +16,7 @@ log_ok() {
   local GREEN='\033[0;32m'
   local NO_COLOR='\033[0m'
   # shellcheck disable=SC2059
-  printf "\n${GREEN}${fmt}${NO_COLOR}\n" "$@"
+  printf "${GREEN}${fmt}${NO_COLOR}\n" "$@"
 }
 
 update_software() {
