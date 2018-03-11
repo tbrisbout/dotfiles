@@ -107,8 +107,8 @@ add_neovim_python_deps() {
     python3-pip \
   > /dev/null
 
-  pip2 install --user --upgrade neovim
-  pip3 install --user --upgrade neovim
+  pip2 install -q --user --upgrade neovim
+  pip3 install -q --user --upgrade neovim
 }
 
 install_neovim() {
