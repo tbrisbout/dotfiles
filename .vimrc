@@ -23,7 +23,12 @@ Plug 'epilande/vim-react-snippets'
 
 " Autocomplete
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+endif
+let g:deoplete#enable_at_startup = 1
 
 " Misc
 Plug 'editorconfig/editorconfig-vim'
