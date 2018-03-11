@@ -5,7 +5,7 @@ filetype off                    " required!
 call plug#begin('~/.vim/plugged')
 
 " UI Plugins
-Plug 'tyrannicaltoucan/vim-quantum', { 'commit': '18be01e' }
+Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
