@@ -159,8 +159,8 @@ clone_dotfiles() {
 }
 
 make_symlinks() {
-  ln -sf ~/dotfiles/nvim ~/.config/nvim
-  ln -sf ~/dotfiles/.vim ~/.vim
+  ln -sTf ~/dotfiles/nvim ~/.config/nvim
+  ln -sTf ~/dotfiles/.vim ~/.vim
   ln -sf ~/dotfiles/.vimrc ~/.vimrc
   ln -sf ~/dotfiles/.zshrc ~/.zshrc
   ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
