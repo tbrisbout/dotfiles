@@ -28,21 +28,17 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 " Misc
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-commentary'
-Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
+
+" Languages Utils
+Plug 'sheerun/vim-polyglot'
+Plug 'cohama/lexima.vim'
+Plug 'alvan/vim-closetag'
 
 " JS
 Plug 'moll/vim-node', { 'for': 'javascript' }
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
 Plug 'tbrisbout/vim-babeljs', { 'for': 'javascript' }
-Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-Plug 'elzr/vim-json', { 'for': 'json' }
-
-" Languages Utils
-Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
-Plug 'elmcast/elm-vim', { 'for': 'elm' }
-Plug 'cohama/lexima.vim'
-Plug 'alvan/vim-closetag'
 
 " Writing
 Plug 'reedes/vim-wordy', { 'for': 'markdown' }
@@ -78,25 +74,31 @@ set showcmd                     " display incomplete commands
 set laststatus=2                " show status line all the time
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+let g:airline#extensions#ale#enabled = 1
 
 "" GUI Stuff
 set number                      " Display line number
 set showmatch                   " Show matching brackets.
 set cursorline
 set splitbelow splitright       " More natural split
-set relativenumber
 
 " Linting
 let g:jsx_ext_required = 0
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exec = './node_modules/.bin/eslint'
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+
+let g:ale_linters = {
+  \ 'javascript': ['eslint', 'flow']
+  \ }
+
+let g:ale_fixers = {
+  \ 'javascript': ['eslint']
+  \ }
+
+let g:ale_fix_on_save=1
+
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
 
 " Elm stuff
-let g:elm_format_autosave = 1
-let g:elm_syntastic_show_warnings = 1
 let g:ycm_semantic_triggers = { 'elm' : ['.'] }
 
 " Avoid backup files~
@@ -127,7 +129,7 @@ nnoremap <Leader>w :w<CR>
 
 nnoremap <leader>r :make<cr>
 
-" next/prev entry in location list (e.g. syntastic issue)
+" next/prev entry in location list (e.g. linter issue)
 " n and N mimic behavior of * word search
 nnoremap <leader>n :lnext<cr>
 nnoremap <leader>N :lprev<cr>
