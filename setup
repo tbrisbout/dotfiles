@@ -71,6 +71,10 @@ install_docker_compose() {
   fi
 }
 
+docker_group_exists?() {
+  groups | grep -q docker
+}
+
 add_docker_user_group() {
   if ! docker_group_exists?; then
     sudo groupadd docker
@@ -201,10 +205,6 @@ install_vim_plugins() {
   fi
 
   vim +PlugInstall +qall
-}
-
-docker_group_exists?() {
-  groups | grep -q docker
 }
 
 
