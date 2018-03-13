@@ -204,7 +204,7 @@ install_vim_plugins() {
     curl -fLo "$file_location" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   fi
 
-  vim +PlugInstall +qall
+  nvim +PlugInstall +qall
 }
 
 
