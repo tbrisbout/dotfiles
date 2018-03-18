@@ -21,7 +21,7 @@ alias mux=tmuxinator
 
 export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
 export TERM="screen-256color"
-export EDITOR='vim'
+export EDITOR='nvim'
 
 # Proxy setting
 [ -f ~/.proxy ] && source ~/.proxy
