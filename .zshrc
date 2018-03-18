@@ -50,8 +50,8 @@ else
 fi
 
 # add rbenv to path
-export PATH="$HOME/.rbenv/shims:$PATH"
-rbenv global 2.2.3
+# export PATH="$HOME/.rbenv/shims:$PATH"
+# rbenv global 2.2.3
 
 # load nvm and use lts node version
 export NVM_DIR="/home/thomas/.nvm"
