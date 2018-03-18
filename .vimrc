@@ -10,6 +10,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
+Plug 'trevordmiller/nova-vim'
 
 " Git
 Plug 'airblade/vim-gitgutter'
@@ -55,8 +56,8 @@ filetype plugin indent on       " load file type plugins + indentation
 
 syntax enable
 
-colorscheme quantum
-let g:airline_theme='quantum'
+colorscheme nova
+let g:airline_theme='nova'
 
 "" Whitespace
 set nowrap                      " don't wrap lines
