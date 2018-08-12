@@ -72,7 +72,7 @@ install_docker_compose() {
 }
 
 docker_group_exists?() {
-  groups | grep -q docker
+  grep -q docker /etc/group
 }
 
 add_docker_user_group() {
