@@ -121,6 +121,18 @@ install_neovim() {
   add_neovim_python_deps
 }
 
+add_tlp_apt_repository() {
+  if ! is_repo_in_source_list? tlp; then
+    sudo add-apt-repository -y ppa:linrunner/tlp
+    update_software
+  fi
+}
+
+install_tlp() {
+  add_tlp_apt_repository
+  sudo apt-get install -y tlp tlp-rdw > /dev/null
+}
+
 install_desktop_tools() {
   sudo apt-get install -y \
     vlc \
@@ -222,6 +234,7 @@ main() {
   add_docker_user_group
 
   log_step 3 "Install Dev Tools"
+  install_tlp
   install_dev_tools
   install_desktop_tools
   install_neovim
