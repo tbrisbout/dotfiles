@@ -60,3 +60,5 @@ nvm use --silent --lts
 
 # Configure keyboard in console (CapsLock as Ctrl and RightAlt as Compose)
 setxkbmap -option ctrl:nocaps -option compose:ralt
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

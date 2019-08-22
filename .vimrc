@@ -6,7 +6,9 @@ call plug#begin('~/.vim/plugged')
 
 " UI Plugins
 Plug 'tyrannicaltoucan/vim-quantum'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
@@ -174,8 +176,10 @@ nnoremap <leader>h :bprevious<CR>
 " Delete current buffer
 nnoremap <leader>bd :bd<CR>
 
+nnoremap <C-P> :Files<cr>
+
 " Open buffer list
-nnoremap <leader><leader> :CtrlPBuffer<cr>
+nnoremap <leader><leader> :Buffers<cr>
 
 " Exit insert mode faster
 inoremap jj <Esc>
@@ -183,7 +187,8 @@ inoremap jk <Esc>:w<CR>
 inoremap j; <Esc>m`A;<Esc>``
 
 " faster search
-nnoremap <leader>f :grep!<SPACE>
+nnoremap <leader>f :Ag<cr>
+nnoremap <leader>: :History:<cr>
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " Clear search highlight
@@ -201,9 +206,11 @@ silent! nnoremap <Leader>gn :GitGutterNextHunk<CR>
 silent! nnoremap <Leader>gp :GitGutterPrevHunk<CR>
 silent! nnoremap <Leader>gr :GitGutterRevertHunk<CR>
 
+nnoremap <leader>gs :Gstatus<cr>
+
 set wildmenu
 set wildmode=list:longest,full
-" Path ignore (wildmenu, ctrlp..)
+" Path ignore (wildmenu, search...)
 set wildignore+=*/.git/*,*/node_modules/*,*/bower_components/*,*/dist/*,*/elm-stuff/*
 
 " Escape to Normal mode in Nvim terminal
