@@ -45,6 +45,7 @@ Plug 'alvan/vim-closetag'
 Plug 'moll/vim-node', { 'for': 'javascript' }
 Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
 Plug 'tbrisbout/vim-babeljs', { 'for': 'javascript' }
+Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 
 " Writing
 Plug 'reedes/vim-wordy', { 'for': 'markdown' }
@@ -92,11 +93,11 @@ set splitbelow splitright       " More natural split
 let g:jsx_ext_required = 0
 
 let g:ale_linters = {
-  \ 'javascript': ['eslint', 'flow']
+  \ 'javascript': ['eslint']
   \ }
 
 let g:ale_fixers = {
-  \ 'javascript': ['eslint']
+  \ 'javascript': ['prettier', 'eslint']
   \ }
 
 " Avoid draining laptop battery
