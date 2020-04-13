@@ -211,9 +211,9 @@ set wildmode=list:longest,full
 " Path ignore (wildmenu, search...)
 set wildignore+=*/.git/*,*/node_modules/*,*/bower_components/*,*/dist/*,*/elm-stuff/*
 
-" Escape to Normal mode in Nvim terminal
 if has('nvim')
-  tnoremap <Esc> <C-\><C-n>
+  set inccommand=nosplit " live preview of substitutions command
+  autocmd FileType fzf tnoremap <buffer> <Esc> <Esc>
 endif
 
 " AutoCorrect typos in Insert Mode
