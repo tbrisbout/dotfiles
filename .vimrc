@@ -9,8 +9,7 @@ Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'trevordmiller/nova-vim'
 
@@ -60,7 +59,9 @@ filetype plugin indent on       " load file type plugins + indentation
 syntax enable
 
 colorscheme nova
-let g:airline_theme='nova'
+let g:lightline = {
+  \ 'colorscheme': 'nova',
+  \ }
 
 "" Whitespace
 set nowrap                      " don't wrap lines
@@ -81,9 +82,6 @@ set grepprg=ag\ --nogroup\ --nocolor
 set ruler                       " show the cursor position all the time
 set showcmd                     " display incomplete commands
 set laststatus=2                " show status line all the time
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-let g:airline#extensions#ale#enabled = 1
 
 "" GUI Stuff
 set number                      " Display line number
