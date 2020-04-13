@@ -41,6 +41,7 @@ Plug 'dense-analysis/ale'
 Plug 'sheerun/vim-polyglot'
 Plug 'cohama/lexima.vim'
 Plug 'alvan/vim-closetag'
+Plug 'AndrewRadev/splitjoin.vim'
 
 " JS
 Plug 'moll/vim-node', { 'for': 'javascript' }
