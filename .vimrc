@@ -50,9 +50,9 @@ Plug 'tbrisbout/vim-babeljs', { 'for': 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 
 " Writing
-Plug 'reedes/vim-wordy', { 'for': 'markdown' }
-Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
-Plug 'junegunn/limelight.vim', { 'for': 'markdown' }
+Plug 'reedes/vim-wordy'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 
 call plug#end()
 filetype plugin indent on       " load file type plugins + indentation
