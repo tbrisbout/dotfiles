@@ -35,7 +35,7 @@ let g:deoplete#enable_at_startup = 1
 " Misc
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-commentary'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 " Languages Utils
 Plug 'sheerun/vim-polyglot'
@@ -202,7 +202,7 @@ let g:NERDTreeMapPreview="<F4>"
 " Move to prev / next change
 silent! nnoremap <Leader>gn :GitGutterNextHunk<CR>
 silent! nnoremap <Leader>gp :GitGutterPrevHunk<CR>
-silent! nnoremap <Leader>gr :GitGutterRevertHunk<CR>
+silent! nnoremap <Leader>gr :GitGutterUndoHunk<CR>
 
 nnoremap <leader>gs :Gstatus<cr>
 
