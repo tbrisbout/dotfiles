@@ -176,6 +176,9 @@ nnoremap <leader>bd :bd<CR>
 
 nnoremap <C-P> :Files<cr>
 
+" Open fuzzy finder in current dir of current buffer (find sibling files)
+nnoremap <silent> <Leader>. :Files <C-r>=expand("%:h")<CR>/<CR>
+
 " Open buffer list
 nnoremap <leader><leader> :Buffers<cr>
 
