@@ -85,10 +85,9 @@ set showcmd                     " display incomplete commands
 set laststatus=2                " show status line all the time
 
 "" GUI Stuff
-set number                      " Display line number
 set showmatch                   " Show matching brackets.
-set cursorline
 set splitbelow splitright       " More natural split
+set foldcolumn=2                " Use foldcolumn for left padding
 
 " Linting
 let g:jsx_ext_required = 0
