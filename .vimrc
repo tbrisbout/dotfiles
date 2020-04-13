@@ -38,6 +38,7 @@ Plug 'tpope/vim-commentary'
 Plug 'dense-analysis/ale'
 
 " Languages Utils
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'sheerun/vim-polyglot'
 Plug 'cohama/lexima.vim'
 Plug 'alvan/vim-closetag'
@@ -69,7 +70,7 @@ set nowrap                      " don't wrap lines
 set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
-set list listchars=trail:·,tab:▸\ ,nbsp:·
+set list listchars=trail:·,tab:·\ ,nbsp:·
 
 "" Searching
 set hlsearch                    " highlight matches
@@ -110,6 +111,13 @@ let g:ale_sign_warning = '⚠'
 
 " Elm stuff
 let g:ycm_semantic_triggers = { 'elm' : ['.'] }
+
+" Go Stuff
+let g:go_fmt_command = "goimports"
+let g:go_metalinter_autosave=1
+let g:go_metalinter_enabled = ['deadcode', 'errcheck', 'gosimple', 'govet', 'staticcheck', 'typecheck', 'unused', 'varcheck']
+let g:go_auto_type_info=1
+let g:go_doc_popup_window=1
 
 " Avoid backup files~
 set nobackup
@@ -241,4 +249,9 @@ augroup vimrc_autocmds
   autocmd BufEnter * set completeopt-=preview
   autocmd FileType javascript setlocal makeprg=node\ %
   autocmd Filetype elm setlocal makeprg=elm-make\ %
+
+  autocmd FileType go nmap <leader>r  <Plug>(go-run)
+  autocmd FileType go nmap <leader>b  <Plug>(go-build)
+  autocmd FileType go nmap <leader>t  <Plug>(go-test)
+  autocmd FileType go nmap <leader>s  <Plug>(go-alternate-edit)
 augroup END
