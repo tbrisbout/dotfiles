@@ -209,6 +209,8 @@ silent! map <F3> :NERDTreeFind<CR>
 
 let g:NERDTreeMapActivateNode="<F3>"
 let g:NERDTreeMapPreview="<F4>"
+let NERDTreeMinimalUI=1
+let NERDTreeAutoDeleteBuffer=1
 
 " Move to prev / next change
 silent! nnoremap <Leader>gn :GitGutterNextHunk<CR>
