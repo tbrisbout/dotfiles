@@ -130,6 +130,9 @@ let g:closetag_filenames = '*.html,*.xml,*.js'
 set mouse=a
 let mapleader = " "
 
+" edit vimrc
+nnoremap <leader>ev :e $HOME/.vimrc<cr>
+
 " Copy / Paste
 vnoremap <Leader>y "+y
 vnoremap <Leader>d "+d
