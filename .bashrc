@@ -74,9 +74,9 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-export PATH="$HOME/.cargo/bin:$HOME/bin:$HOME/bin/go/bin:$PATH"
 export GOPATH="$HOME/dev/go"
 export GOBIN="$GOPATH/bin"
+export PATH="$HOME/.cargo/bin:$HOME/bin:$HOME/bin/go/bin:$GOBIN:$PATH"
 
 #
 # Keyboard:

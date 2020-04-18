@@ -94,7 +94,8 @@ set foldcolumn=2                " Use foldcolumn for left padding
 let g:jsx_ext_required = 0
 
 let g:ale_linters = {
-  \ 'javascript': ['eslint']
+  \ 'javascript': ['eslint'],
+  \ 'go': ['gobuild', 'govet', 'staticcheck']
   \ }
 
 let g:ale_fixers = {
@@ -114,9 +115,6 @@ let g:ycm_semantic_triggers = { 'elm' : ['.'] }
 
 " Go Stuff
 let g:go_fmt_command = "goimports"
-let g:go_metalinter_autosave=1
-let g:go_metalinter_enabled = ['deadcode', 'errcheck', 'gosimple', 'govet', 'staticcheck', 'typecheck', 'unused', 'varcheck']
-let g:go_auto_type_info=1
 let g:go_doc_popup_window=1
 
 " Avoid backup files~
