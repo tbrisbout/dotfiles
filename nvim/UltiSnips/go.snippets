@@ -1,0 +1,11 @@
+snippet trun "add t.Run(...) subtest"
+t.Run("${1:test}", func(t *testing.T) {
+	$2
+})
+endsnippet
+
+snippet gotwant "add test assertion"
+if got != want {
+	t.Errorf("got %q want %q", got, want)
+}
+endsnippet
