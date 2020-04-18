@@ -14,6 +14,7 @@ alias wl='wc -l'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias src='source $HOME/.bashrc'
+alias bashrc='vim $HOME/.bashrc'
 alias vimrc='vim $HOME/.vimrc'
 alias vim=nvim
 alias v=nvim
@@ -27,6 +28,7 @@ alias gc='git ci'
 # fuzzy
 alias fgl='fzf_git_log'
 alias fcd='fzf_change_directory'
+alias f=fcd
 alias fkill='fzf_kill'
 
 # Enable the useful Bash features:
@@ -84,10 +86,6 @@ export PATH="$HOME/.cargo/bin:$HOME/bin:$HOME/bin/go/bin:$GOBIN:$PATH"
 # - Right Alt as compose key
 #
 setxkbmap -option ctrl:nocaps -option compose:ralt
-
-#
-# Git aliases
-#
 
 #
 # fzf config and goodies
