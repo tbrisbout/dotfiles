@@ -20,16 +20,21 @@ alias vim=nvim
 alias v=nvim
 alias tnew='tmux new -s $(basename $(pwd) | cut -d"." -f1)'
 alias open='xdg-open 2>/dev/null'
+
 # git
 alias g='_f() { if [[ $# == 0 ]]; then git status --short --branch; else git "$@"; fi }; _f'
 alias gd='git diff'
 alias gap='git add -p'
 alias gc='git ci'
+alias br='git br | fzf | xargs git co'
+alias gbr='git br -r | fzf | xargs git co --track' # Checkout remote branch locally
+
 # fuzzy
 alias fgl='fzf_git_log'
 alias fcd='fzf_change_directory'
 alias f=fcd
 alias fkill='fzf_kill'
+alias fenv='env | fzf'
 
 # Enable the useful Bash features:
 #  - autocd, no need to type 'cd' when changing directory
