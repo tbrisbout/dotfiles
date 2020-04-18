@@ -102,13 +102,12 @@ let g:ale_fixers = {
   \ 'javascript': ['prettier', 'eslint']
   \ }
 
-" Avoid draining laptop battery
-let g:ale_fix_on_save=1
-let g:ale_lint_on_text_changed='normal'
-let g:ale_lint_on_insert_leave=1
+let g:ale_sign_error = '•'
+let g:ale_sign_warning = '◦'
 
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '⚠'
+let g:ale_echo_msg_format = '[%linter%] %s'
+let g:ale_open_list=1
+let g:ale_list_window_size = 5
 
 " Elm stuff
 let g:ycm_semantic_triggers = { 'elm' : ['.'] }
