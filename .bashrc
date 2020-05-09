@@ -65,7 +65,7 @@ parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\] \[\033[33;1m\]\w\[\033[m\]\$(parse_git_branch) \$ "
+PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\] \[\033[33;1m\]\w\[\033[m\]\$(parse_git_branch) ➜ "
 
 if [ -e ~/.bashrc.aliases ] ; then
    source ~/.bashrc.aliases
