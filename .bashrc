@@ -21,6 +21,11 @@ alias v=nvim
 alias tnew='tmux new -s $(basename $(pwd) | cut -d"." -f1)'
 alias open='xdg-open 2>/dev/null'
 
+function getcol() { awk "{print \$${1:-1}}"; }
+alias c1='getcol 1'
+alias c2='getcol 2'
+alias c3='getcol 3'
+
 # git
 alias g='_f() { if [[ $# == 0 ]]; then git status --short --branch; else git "$@"; fi }; _f'
 alias gd='git diff'
