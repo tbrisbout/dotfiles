@@ -18,8 +18,11 @@ alias bashrc='vim $HOME/.bashrc'
 alias vimrc='vim $HOME/.vimrc'
 alias vim=nvim
 alias v=nvim
+alias e=exit
 alias tnew='tmux new -s $(basename $(pwd) | cut -d"." -f1)'
 alias open='xdg-open 2>/dev/null'
+
+alias fd=fdfind
 
 function getcol() { awk "{print \$${1:-1}}"; }
 alias c1='getcol 1'
@@ -27,7 +30,7 @@ alias c2='getcol 2'
 alias c3='getcol 3'
 
 # git
-alias g='_f() { if [[ $# == 0 ]]; then git status --short --branch; else git "$@"; fi }; _f'
+alias g='_f() { if [[ $# == 0 ]]; then git status --branch; else git "$@"; fi }; _f'
 alias gd='git diff'
 alias gap='git add -p'
 alias gc='git ci'
@@ -77,10 +80,7 @@ if [ -e ~/.bashrc.aliases ] ; then
 fi
 
 BROWSER=/usr/bin/chromium
-EDITOR=/usr/bin/nvim
-
-export VOLTA_HOME="$HOME/.volta"
-[ -s "$VOLTA_HOME/load.sh" ] && . "$VOLTA_HOME/load.sh"
+export EDITOR=nvim
 
 export PATH="$VOLTA_HOME/bin:$PATH"
 
@@ -141,3 +141,5 @@ fzf_kill() {
         echo "$pids" | xargs kill -9 "$@"
     fi
 }
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
