@@ -1,3 +1,5 @@
+let g:python3_host_prog='/usr/bin/python3.8' " required for deoplete
+
 set nocompatible                " choose no compatibility with legacy vi
 set encoding=utf-8
 filetype off                    " required!
@@ -77,8 +79,9 @@ set hlsearch                    " highlight matches
 set incsearch                   " incremental searching
 set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
+highlight clear SignColumn
 
-set grepprg=ag\ --nogroup\ --nocolor
+set grepprg=ag\ --nogroup\ --nocolor\ --ignore\ node_modules
 
 "" Status Bar
 set ruler                       " show the cursor position all the time
