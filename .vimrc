@@ -13,7 +13,7 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-Plug 'trevordmiller/nova-vim'
+Plug 'arcticicestudio/nord-vim'
 
 " Git
 Plug 'airblade/vim-gitgutter'
@@ -62,10 +62,15 @@ filetype plugin indent on       " load file type plugins + indentation
 
 syntax enable
 
-colorscheme nova
-let g:lightline = {
-  \ 'colorscheme': 'nova',
-  \ }
+colorscheme nord
+
+" fix background and visual mode
+" do not work well in tmux
+if has('termguicolors')
+  set termguicolors
+endif
+
+let g:lightline = {'colorscheme': 'nord'}
 
 "" Whitespace
 set nowrap                      " don't wrap lines
