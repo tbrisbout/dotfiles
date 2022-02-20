@@ -264,4 +264,5 @@ augroup vimrc_autocmds
   autocmd FileType go nmap <leader>b  <Plug>(go-build)
   autocmd FileType go nmap <leader>t  <Plug>(go-test)
   autocmd FileType go nmap <leader>s  :GoAlternate!<CR>
+  autocmd FileType go nmap <leader>d  :GoDecls<CR>
 augroup END
