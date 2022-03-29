@@ -225,7 +225,7 @@ silent! nnoremap <Leader>gn :GitGutterNextHunk<CR>
 silent! nnoremap <Leader>gp :GitGutterPrevHunk<CR>
 silent! nnoremap <Leader>gr :GitGutterUndoHunk<CR>
 
-nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>gs :Git<cr>
 
 set wildmenu
 set wildmode=list:longest,full
