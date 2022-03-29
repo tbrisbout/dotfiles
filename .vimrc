@@ -266,4 +266,5 @@ augroup vimrc_autocmds
   autocmd FileType go nmap <leader>s  :GoAlternate!<CR>
   autocmd FileType go nnoremap <leader>god  :GoDecls<CR>
   autocmd FileType go nnoremap <leader>gor  :GoReferrers<CR>
+  autocmd FileType go nnoremap <leader>goi  :GoImplements<CR>
 augroup END
