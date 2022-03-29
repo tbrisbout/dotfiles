@@ -206,7 +206,7 @@ inoremap j; <Esc>m`A;<Esc>``
 " faster search
 nnoremap <leader>f :Ag<cr>
 nnoremap <leader>: :History:<cr>
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap <leader>K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " Clear search highlight
 nnoremap <Leader>noh :noh<CR>
