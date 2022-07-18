@@ -16,11 +16,13 @@ alias ...='cd ../..'
 alias src='source $HOME/.bashrc'
 alias bashrc='vim $HOME/.bashrc'
 alias vimrc='vim $HOME/.vimrc'
+alias nvim="$HOME/bin/nvim.appimage"
 alias vim=nvim
 alias v=nvim
 alias e=exit
 alias tnew='tmux new -s $(basename $(pwd) | cut -d"." -f1)'
 alias open='xdg-open 2>/dev/null'
+alias ag='ag --ignore node_modules'
 
 alias fd=fdfind
 
@@ -43,6 +45,8 @@ alias fcd='fzf_change_directory'
 alias f=fcd
 alias fkill='fzf_kill'
 alias fenv='env | fzf'
+
+alias fnpm='npm run $(cat package.json | jq -r ".scripts | keys[]" | fzf)'
 
 # Enable the useful Bash features:
 #  - autocd, no need to type 'cd' when changing directory
@@ -80,7 +84,7 @@ if [ -e ~/.bashrc.aliases ] ; then
 fi
 
 BROWSER=/usr/bin/chromium
-export EDITOR=nvim
+export EDITOR="$HOME/bin/nvim.appimage"
 
 export PATH="$VOLTA_HOME/bin:$PATH"
 

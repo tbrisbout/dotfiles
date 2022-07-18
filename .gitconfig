@@ -17,6 +17,7 @@
 	dif = diff --color-words=.
 	gh-pages = subtree push --prefix dist origin gh-pages
 	dc = diff --cached
+	undo = checkout -p
 [core]
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [color]
