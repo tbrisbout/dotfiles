@@ -7,7 +7,7 @@ filetype off                    " required!
 call plug#begin('~/.vim/plugged')
 
 " UI Plugins
-Plug 'tyrannicaltoucan/vim-quantum'
+" Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -23,10 +23,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'epilande/vim-es2015-snippets'
-Plug 'epilande/vim-react-snippets'
+" Plug 'epilande/vim-react-snippets'
 
 " Autocomplete
-Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
+" Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -49,7 +49,6 @@ Plug 'AndrewRadev/splitjoin.vim'
 " JS
 Plug 'moll/vim-node', { 'for': 'javascript' }
 Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
-Plug 'tbrisbout/vim-babeljs', { 'for': 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 
 " Writing
@@ -89,9 +88,9 @@ highlight clear SignColumn
 set grepprg=ag\ --nogroup\ --nocolor\ --ignore\ node_modules
 
 "" Status Bar
-set ruler                       " show the cursor position all the time
+set noruler                     " show the cursor position all the time
 set showcmd                     " display incomplete commands
-set laststatus=2                " show status line all the time
+set laststatus=0                " hide status line all the time
 
 "" GUI Stuff
 set showmatch                   " Show matching brackets.
@@ -107,7 +106,10 @@ let g:ale_linters = {
   \ }
 
 let g:ale_fixers = {
-  \ 'javascript': ['prettier', 'eslint']
+  \ 'javascript': ['prettier', 'eslint'],
+  \ 'javascriptreact': ['prettier', 'eslint'],
+  \ 'typescript': ['prettier', 'eslint'],
+  \ 'typescriptreact': ['prettier', 'eslint']
   \ }
 
 let g:ale_sign_error = '•'
@@ -117,8 +119,15 @@ let g:ale_echo_msg_format = '[%linter%] %s'
 let g:ale_open_list=1
 let g:ale_list_window_size = 5
 
-" Elm stuff
-let g:ycm_semantic_triggers = { 'elm' : ['.'] }
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_text_changed = 0
+let g:ale_fix_on_save = 1
+
+let g:ale_virtualtext_cursor = 1
+let g:ale_floating_preview = 1
+let g:ale_floating_window_border = []
+
 
 " Go Stuff
 let g:go_fmt_command = "goimports"
@@ -157,8 +166,8 @@ nnoremap <leader>r :make<cr>
 
 " next/prev entry in location list (e.g. linter issue)
 " n and N mimic behavior of * word search
-nnoremap <leader>n :lnext<cr>
-nnoremap <leader>N :lprev<cr>
+nnoremap <silent> <leader>n :ALENext<cr>
+nnoremap <silent> <leader>N :ALEPrevious<cr>
 
 " insert comma / semicolon at end of line
 nnoremap <Leader>, m`A,<Esc>``
@@ -167,8 +176,9 @@ nnoremap <Leader>; m`A;<Esc>``
 " open es module import
 nnoremap <Leader>gf 0f'gf
 
-" visually select a function (WIP)
-nnoremap <Leader>vf va{V
+nnoremap <silent> gr :ALEFindReferences<cr>
+nnoremap <leader>I :ALEDetail<cr>
+
 
 " wrap visual selection with console.log
 vnoremap <leader>log cconsole.log()<esc>P
@@ -194,6 +204,9 @@ nnoremap <C-P> :Files<cr>
 
 " Open fuzzy finder in current dir of current buffer (find sibling files)
 nnoremap <silent> <Leader>. :Files <C-r>=expand("%:h")<CR>/<CR>
+
+" Open command palette
+nnoremap <silent> <C-K> :Commands<cr>
 
 " Open buffer list
 nnoremap <leader><leader> :Buffers<cr>
@@ -243,6 +256,9 @@ iabbrev heigth height
 iabbrev widht width
 iabbrev fucntion function
 iabbrev funciton function
+iabbrev retunr return
+iabbrev reutrn return
+iabbrev fitler filter
 
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
@@ -267,4 +283,8 @@ augroup vimrc_autocmds
   autocmd FileType go nnoremap <leader>god  :GoDecls<CR>
   autocmd FileType go nnoremap <leader>gor  :GoReferrers<CR>
   autocmd FileType go nnoremap <leader>goi  :GoImplements<CR>
+
+  autocmd FileType javascript,typescript,typescriptreact nnoremap <silent> K :ALEHover<cr>
+  autocmd FileType javascript,typescript,typescriptreact map <silent> <buffer> <c-]> :ALEGoToDefinition<cr>
+  autocmd FileType javascript,typescript,typescriptreact nnoremap <silent> <leader>t :npm test -s -- -- --bail --ci %:p:h<cr>
 augroup END
