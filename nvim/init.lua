@@ -175,7 +175,7 @@ local function open_alternate_file()
   local file_base_name = vim.fn.expand("%:r")
 
 	local alternate_file
-	if file_base_name:sub(-#alternate_pattern) == alternate_pattern then
+	if vim.endswith(file_base_name, alternate_pattern) then
 		alternate_file = file_base_name:sub(1, -#alternate_pattern - 1) .. file_extension
 	else
 		alternate_file = file_base_name .. alternate_pattern .. file_extension
