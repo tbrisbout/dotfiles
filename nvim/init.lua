@@ -65,6 +65,13 @@ end
 nnoremap('<space>', '')
 vim.g.mapleader = ' '
 
+leader('y', '"+y')
+vim.keymap.set('v', '<leader>y', '"+y', { silent = true })
+leader('p', '"+p')
+vim.keymap.set('v', '<leader>p', '"+p', { silent = true })
+leader('P', '"+P')
+vim.keymap.set('v', '<leader>P', '"+P', { silent = true })
+
 leader('bd', ':bd<cr>')
 leader('O', 'ko<esc>j')
 leader('o', 'o<esc>k')
