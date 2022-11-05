@@ -39,6 +39,9 @@ alias gc='git ci'
 alias br='git br | fzf | xargs git co'
 alias gbr='git br -r | fzf | xargs git co --track' # Checkout remote branch locally
 
+# pandoc to create pdf from markdown
+alias pandock='docker run --rm -v "$(pwd):/data" -u $(id -u):$(id -g) pandoc/latex'
+
 # fuzzy
 alias fgl='fzf_git_log'
 alias fcd='fzf_change_directory'
