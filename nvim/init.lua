@@ -218,11 +218,12 @@ local lspconfig = require 'lspconfig'
 require('nvim-lsp-installer').setup()
 
 local cmp = require 'cmp'
+local ls = require 'luasnip'
 
 cmp.setup({
 	snippet = {
 		expand = function(args)
-			require'luasnip'.lsp_expand(args.body)
+			ls.lsp_expand(args.body)
 		end
 	},
 	mapping = cmp.mapping.preset.insert({
@@ -359,3 +360,30 @@ local function run_tests()
 end
 
 leader('t', run_tests)
+
+-- snippets
+ls.config.set_config {
+  history = true,
+  updateevents = "TextChanged,TextChangedI"
+}
+
+require("luasnip.loaders.from_lua").load({paths = "./snippets"})
+
+-- jump to editable fields
+vim.keymap.set({ "i", "s" }, "<c-k>", function()
+  if ls.expand_or_jumpable() then
+    ls.expand_or_jump()
+  end
+end, { silent = true })
+
+vim.keymap.set({ "i", "s" }, "<c-j>", function()
+  if ls.jumpable(-1) then
+    ls.jump(-1)
+  end
+end, { silent = true })
+
+vim.keymap.set({ "i", "s" }, "<c-l>", function()
+  if ls.choice_active() then
+    ls.change_choice(1)
+  end
+end)
