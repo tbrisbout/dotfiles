@@ -25,6 +25,9 @@
 --
 --   Snippets
 --     - Configure some snippets for luasnip
+--
+--    syntax
+--      - TODO / FIXME highlight
 
 -- Global config
 
@@ -91,6 +94,8 @@ inoremap('kj', '<esc>:w<cr>')
 -- TODO check if I can/should move this to plugin setup
 nnoremap('<F2>', ':NvimTreeToggle<cr>')
 nnoremap('<F3>', ':NvimTreeFindFileToggle<cr>')
+
+leader('I', ':lua vim.diagnostic.open_float()<cr>')
 
 -- plugins
 
@@ -254,27 +259,16 @@ local common_lsp_config = {
 	capabilities = capabilities,
 }
 
-lspconfig.sumneko_lua.setup {
-	on_attach = on_attach,
-  capabilities = capabilities,
-	settings = {
-		Lua = {
-      runtime = {
-        version = 'LuaJIT',
-      },
-			diagnostics = {
-				globals = { 'vim' }
-			},
-      workspace = {
-        library = vim.api.nvim_get_runtime_file("", true)
-      }
-		}
-	}
-}
-
 lspconfig.gopls.setup(common_lsp_config)
 lspconfig.tsserver.setup(common_lsp_config)
 lspconfig.tailwindcss.setup(common_lsp_config)
+
+
+-- global diagnostics behavior
+vim.diagnostic.config({
+  virtual_text = false,
+  update_in_insert = false,
+})
 
 -- abbreviations
 
@@ -299,7 +293,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   group = group_id,
   pattern = { "*.go", "*.ts", "*.tsx", "*.js", "*.jsx" },
   callback = function()
-	  vim.lsp.buf.formatting_sync(nil, 3000)
+	  vim.lsp.buf.format({ timeout_ms = 3000 })
   end,
 })
 
