@@ -5,7 +5,7 @@
 --     - Show coverage
 --
 --   Formatting
---     - On save: Linting / prettier / fmt (goimports)
+--     - On save: prettier / fmt (goimports)
 --
 --   Editing
 --     - Auto close pairs?
@@ -125,6 +125,8 @@ require('packer').startup(function(use)
 	use 'saadparwaiz1/cmp_luasnip'
 	use 'hrsh7th/cmp-nvim-lsp'
 
+	use 'folke/trouble.nvim'
+
 	end
 )
 
@@ -197,7 +199,7 @@ local function open_alternate_file()
 end
 
 local function show_buffers()
-	telescope.buffers { ignore_current_buffer = true }
+	telescope.buffers { ignore_current_buffer = true, sort_mru = true }
 end
 
 leader('s', open_alternate_file)
@@ -213,6 +215,8 @@ leader('K', telescope.grep_string)
 leader('reg', telescope.registers)
 leader('gor', telescope.lsp_dynamic_workspace_symbols)
 leader('goi', telescope.lsp_implementations)
+
+leader('vca', vim.lsp.buf.code_action)
 
 -- TODO chose between the better use of map below
 leader('god', telescope.diagnostics)
@@ -244,7 +248,6 @@ cmp.setup({
 	},
 })
 
--- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local function on_attach()
@@ -262,12 +265,19 @@ local common_lsp_config = {
 lspconfig.gopls.setup(common_lsp_config)
 lspconfig.tsserver.setup(common_lsp_config)
 lspconfig.tailwindcss.setup(common_lsp_config)
+lspconfig.eslint.setup(common_lsp_config)
+lspconfig.bashls.setup(common_lsp_config)
 
 
 -- global diagnostics behavior
 vim.diagnostic.config({
   virtual_text = false,
   update_in_insert = false,
+})
+
+local trouble = require('trouble')
+trouble.setup({
+  auto_close = true,
 })
 
 -- abbreviations
@@ -297,13 +307,23 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = group_id,
+  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
+  callback = function()
+    vim.cmd 'EslintFixAll'
+	  vim.lsp.buf.format({ timeout_ms = 3000 })
+  end,
+})
+
 -- show diagnostics in loclist after writing the file (like linting in ALE or Syntastic)
 vim.api.nvim_create_autocmd("BufWritePost", {
   group = group_id,
   pattern = { "*.go", "*.ts", "*.tsx", "*.js", "*.jsx" },
   callback = function()
-    vim.diagnostic.setloclist()
-    vim.cmd [[lw]]
+    if not vim.tbl_isempty(vim.diagnostic.get(0)) then
+      trouble.open()
+    end
   end,
 })
 
