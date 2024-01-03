@@ -15,11 +15,18 @@
 	last = log -1
 	br = branch
 	dif = diff --color-words=.
-	gh-pages = subtree push --prefix dist origin gh-pages
 	dc = diff --cached
 	undo = checkout -p
 [core]
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+  navigate = true
+[merge]
+  conflictstyle = diff3
+[diff]
+  colorMoved = default
 [color]
 	ui = true
 [color "diff-highlight"]
@@ -34,3 +41,5 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
+[init]
+	defaultBranch = main
