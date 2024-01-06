@@ -8,7 +8,6 @@
 --     - On save: prettier / fmt (goimports)
 --
 --   Editing
---     - Auto close pairs?
 --     - Close HTML tags?
 --
 --   Git
@@ -107,6 +106,7 @@ require('packer').startup(function(use)
 	use 'arcticicestudio/nord-vim'
 
 	use 'tpope/vim-commentary'
+	use 'm4xshen/autoclose.nvim'
 
 	use 'lewis6991/gitsigns.nvim'
 
@@ -133,6 +133,7 @@ require('packer').startup(function(use)
 vim.cmd [[colorscheme nord]]
 
 require('nvim-tree').setup()
+require('autoclose').setup()
 
 
 require('nvim-treesitter.configs').setup {
