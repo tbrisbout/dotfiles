@@ -137,7 +137,7 @@ require('autoclose').setup()
 
 
 require('nvim-treesitter.configs').setup {
-	ensure_installed = { "go", "typescript", "javascript", "lua", "bash" },
+	ensure_installed = { "go", "rust", "typescript", "javascript", "lua", "bash" },
 	highlight = {
 		enable = true,
 	},
@@ -264,6 +264,7 @@ local common_lsp_config = {
 }
 
 lspconfig.gopls.setup(common_lsp_config)
+lspconfig.rust_analyzer.setup(common_lsp_config)
 lspconfig.tsserver.setup(common_lsp_config)
 lspconfig.tailwindcss.setup(common_lsp_config)
 lspconfig.eslint.setup(common_lsp_config)
