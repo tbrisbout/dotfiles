@@ -307,7 +307,7 @@ local group_id = vim.api.nvim_create_augroup('my_autocommands', {})
 -- run gofmt / ...
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = group_id,
-  pattern = { "*.go", "*.ts", "*.tsx", "*.js", "*.jsx" },
+  pattern = { "*.go", "*.rs", "*.ts", "*.tsx", "*.js", "*.jsx" },
   callback = function()
 	  vim.lsp.buf.format({ timeout_ms = 3000 })
   end,
@@ -325,7 +325,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- show diagnostics in loclist after writing the file (like linting in ALE or Syntastic)
 vim.api.nvim_create_autocmd("BufWritePost", {
   group = group_id,
-  pattern = { "*.go", "*.ts", "*.tsx", "*.js", "*.jsx" },
+  pattern = { "*.go", "*.rs", "*.ts", "*.tsx", "*.js", "*.jsx" },
   callback = function()
     if not vim.tbl_isempty(vim.diagnostic.get(0)) then
       trouble.open()
