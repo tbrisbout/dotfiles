@@ -74,6 +74,10 @@ vim.keymap.set('v', '<leader>p', '"+p', { silent = true })
 leader('P', '"+P')
 vim.keymap.set('v', '<leader>P', '"+P', { silent = true })
 
+-- vertically center search
+nnoremap('n', 'nzz')
+nnoremap('N', 'Nzz')
+
 leader('bd', ':bd<cr>')
 leader('O', 'ko<esc>j')
 leader('o', 'o<esc>k')
@@ -352,14 +356,21 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 local js_ts_file_types = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' }
 
--- TODO use a better prettier implem (e.g. with null-ls)
+-- TODO use a better prettier implem with an LSP wrapper
 -- This will replace the file with an error if there is a problem, and can lose cursor position
-vim.api.nvim_create_autocmd("FileType", {
-  group = group_id,
-  pattern = js_ts_file_types,
-  command = "nnoremap <buffer><silent> <leader>gf :%!prettier --stdin-filepath %<cr>",
-})
+local function run_prettier()
+  if vim.tbl_contains(js_ts_file_types, vim.bo.filetype) then
+    local filepath = vim.api.nvim_buf_get_name(0)
 
+    -- prettier does not support files with brackets (like files with param in Next.js)
+    filepath = filepath:gsub('%[', '\\[')
+    filepath = filepath:gsub('%]', '\\]')
+
+    vim.cmd('%!prettier --stdin-filepath ' .. filepath)
+  end
+end
+
+leader("ff", run_prettier)
 
 -- TODO improve the function for other filetypes
 local function run_tests()
