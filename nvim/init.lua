@@ -131,6 +131,8 @@ require('packer').startup(function(use)
 
 	use 'folke/trouble.nvim'
 
+  use 'folke/zen-mode.nvim'
+  use 'folke/twilight.nvim'
 	end
 )
 
