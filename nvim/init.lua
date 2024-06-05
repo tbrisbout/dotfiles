@@ -24,14 +24,10 @@
 --
 --   Snippets
 --     - Configure some snippets for luasnip
---
---    syntax
---      - TODO / FIXME highlight
 
 -- Global config
-
 if not vim.env.TMUX then
-	vim.o.termguicolors = true
+  vim.o.termguicolors = true
 end
 
 vim.o.mouse = 'a'
@@ -102,45 +98,61 @@ leader('I', ':lua vim.diagnostic.open_float()<cr>')
 
 -- plugins
 
-vim.cmd [[packadd packer.nvim]]
+-- Install lazy.nvim if not installed
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
-require('packer').startup(function(use)
-	use 'wbthomason/packer.nvim'
-	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-	use 'arcticicestudio/nord-vim'
+require('lazy').setup({
+	{ 'nvim-treesitter/nvim-treesitter', cmd = 'TSUpdate' },
+	'shaunsingh/nord.nvim',
+	'bluz71/vim-nightfly-colors',
 
-	use 'tpope/vim-commentary'
-	use 'm4xshen/autoclose.nvim'
+	'tpope/vim-commentary',
+	'm4xshen/autoclose.nvim',
 
-	use 'lewis6991/gitsigns.nvim'
+	'lewis6991/gitsigns.nvim',
+	'tpope/vim-fugitive',
 
-	use 'neovim/nvim-lspconfig'
-	use 'williamboman/nvim-lsp-installer'
+	'ray-x/go.nvim',
+	'ray-x/guihua.lua',
 
-	use 'nvim-lua/plenary.nvim'
-	use 'nvim-telescope/telescope.nvim'
+	'neovim/nvim-lspconfig',
+	'williamboman/nvim-lsp-installer',
 
-	use 'kyazdani42/nvim-web-devicons'
-	use 'kyazdani42/nvim-tree.lua'
+	'nvim-lua/plenary.nvim',
+	'nvim-telescope/telescope.nvim',
 
-	use 'L3MON4D3/LuaSnip'
+	'kyazdani42/nvim-web-devicons',
+	'kyazdani42/nvim-tree.lua',
 
-	use 'hrsh7th/nvim-cmp'
-	use 'saadparwaiz1/cmp_luasnip'
-	use 'hrsh7th/cmp-nvim-lsp'
+	'L3MON4D3/LuaSnip',
 
-	use 'folke/trouble.nvim'
+	'hrsh7th/nvim-cmp',
+	'saadparwaiz1/cmp_luasnip',
+	'hrsh7th/cmp-nvim-lsp',
 
-  use 'folke/zen-mode.nvim'
-  use 'folke/twilight.nvim'
-	end
-)
+	'folke/trouble.nvim',
 
-vim.cmd [[colorscheme nord]]
+  'folke/zen-mode.nvim',
+  'folke/twilight.nvim',
+})
+
+vim.cmd [[colorscheme nightfly]]
 
 require('nvim-tree').setup()
 require('autoclose').setup()
 
+require('go').setup()
 
 require('nvim-treesitter.configs').setup {
 	ensure_installed = { "go", "rust", "typescript", "javascript", "lua", "bash" },
