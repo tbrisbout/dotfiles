@@ -321,7 +321,7 @@ local group_id = vim.api.nvim_create_augroup('my_autocommands', {})
 -- run gofmt / ...
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = group_id,
-  pattern = { "*.go", "*.rs", "*.ts", "*.tsx", "*.js", "*.jsx" },
+  pattern = { "*.go", "*.rs" },
   callback = function()
 	  vim.lsp.buf.format({ timeout_ms = 3000 })
   end,
@@ -332,7 +332,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
   callback = function()
     vim.cmd 'EslintFixAll'
-	  vim.lsp.buf.format({ timeout_ms = 3000 })
   end,
 })
 
@@ -380,7 +379,8 @@ local function run_prettier()
     filepath = filepath:gsub('%[', '\\[')
     filepath = filepath:gsub('%]', '\\]')
 
-    vim.cmd('%!prettier --stdin-filepath ' .. filepath)
+    -- TODO make prettier path project based
+    vim.cmd('%!front/node_modules/.bin/prettier --stdin-filepath ' .. filepath)
   end
 end
 
