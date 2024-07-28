@@ -382,7 +382,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = { "*.go", "*.rs", "*.ts", "*.tsx", "*.js", "*.jsx" },
   callback = function()
     if not vim.tbl_isempty(vim.diagnostic.get(0)) then
-      trouble.open()
+      trouble.open('diagnostics')
     end
   end,
 })
