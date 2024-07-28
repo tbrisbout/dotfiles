@@ -53,7 +53,7 @@ local function nnoremap(lhs, rhs, options)
 end
 
 local function leader(lhs, rhs, options)
-	vim.keymap.set('n', '<leader>'..lhs, rhs, options or { silent = true })
+	vim.keymap.set({'n', 'v'}, '<leader>'..lhs, rhs, options or { silent = true })
 end
 
 local function inoremap(lhs, rhs, options)
