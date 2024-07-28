@@ -93,6 +93,7 @@ inoremap('kj', '<esc>:w<cr>')
 -- TODO check if I can/should move this to plugin setup
 nnoremap('<F2>', ':NvimTreeToggle<cr>')
 nnoremap('<F3>', ':NvimTreeFindFileToggle<cr>')
+nnoremap('<F4>', ':CodeCompanionToggle<cr>')
 
 leader('I', ':lua vim.diagnostic.open_float()<cr>')
 
@@ -145,6 +146,20 @@ require('lazy').setup({
 
   'folke/zen-mode.nvim',
   'folke/twilight.nvim',
+
+  {
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope.nvim", -- Optional
+      {
+        "stevearc/dressing.nvim", -- Optional: Improves the default Neovim UI
+        opts = {},
+      },
+    },
+    config = true
+  }
 })
 
 vim.cmd [[colorscheme nightfly]]
@@ -300,6 +315,31 @@ trouble.setup({
   auto_close = true,
 })
 
+require("codecompanion").setup({
+  adapters = {
+    ollama = function()
+      return require("codecompanion.adapters").use("ollama", {
+        schema = {
+          model = {
+            default = "deepseek-coder",
+          },
+        },
+      })
+    end,
+  },
+  strategies = {
+    chat = {
+      adapter = "ollama",
+    },
+    inline = {
+      adapter = "ollama",
+    },
+    agent = {
+      adapter = "ollama",
+    },
+  },
+})
+
 -- abbreviations
 
 vim.cmd 'iabbrev lenght length'
@@ -311,6 +351,7 @@ vim.cmd 'iabbrev retunr return'
 vim.cmd 'iabbrev reutrn return'
 vim.cmd 'iabbrev fitler filter'
 
+vim.cmd 'cabbrev cc CodeCompletion'
 
 
 -- autocmds
