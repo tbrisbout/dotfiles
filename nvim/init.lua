@@ -34,6 +34,9 @@ vim.o.mouse = 'a'
 vim.o.syntax = 'on'
 vim.o.swapfile = false
 vim.o.laststatus = 0
+vim.o.showcmd = false
+vim.o.showmode = false
+vim.o.ruler = false
 vim.o.splitbelow = true
 vim.o.expandtab = true
 vim.o.tabstop = 2
@@ -77,7 +80,7 @@ nnoremap('N', 'Nzz')
 leader('bd', ':bd<cr>')
 leader('O', 'ko<esc>j')
 leader('o', 'o<esc>k')
-leader('w', ':w<cr>')
+leader('w', ':silent write<cr>')
 leader('noh', ':noh<cr>')
 leader('noh', ':noh<cr>')
 leader('ev', ':e $MYVIMRC<cr>')
@@ -114,35 +117,42 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-	{ 'nvim-treesitter/nvim-treesitter', cmd = 'TSUpdate' },
-	'shaunsingh/nord.nvim',
-	'bluz71/vim-nightfly-colors',
+  { 'nvim-treesitter/nvim-treesitter', cmd = 'TSUpdate' },
+  'shaunsingh/nord.nvim',
+  'bluz71/vim-nightfly-colors',
 
-	'tpope/vim-commentary',
-	'm4xshen/autoclose.nvim',
+  'tpope/vim-commentary',
+  'm4xshen/autoclose.nvim',
 
-	'lewis6991/gitsigns.nvim',
-	'tpope/vim-fugitive',
+  'lewis6991/gitsigns.nvim',
+  'tpope/vim-fugitive',
 
-	'ray-x/go.nvim',
-	'ray-x/guihua.lua',
+  'ray-x/go.nvim',
+  'ray-x/guihua.lua',
 
-	'neovim/nvim-lspconfig',
-	'williamboman/nvim-lsp-installer',
+  'neovim/nvim-lspconfig',
+  'williamboman/nvim-lsp-installer',
 
-	'nvim-lua/plenary.nvim',
-	'nvim-telescope/telescope.nvim',
+  'nvim-lua/plenary.nvim',
+  'nvim-telescope/telescope.nvim',
 
-	'kyazdani42/nvim-web-devicons',
-	'kyazdani42/nvim-tree.lua',
+  {
+    "nvim-tree/nvim-tree.lua",
+    lazy = false,
+    dependencies = { "nvim-tree/nvim-web-devicons" }
+  },
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' }
+  },
 
-	'L3MON4D3/LuaSnip',
+  'L3MON4D3/LuaSnip',
 
-	'hrsh7th/nvim-cmp',
-	'saadparwaiz1/cmp_luasnip',
-	'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/nvim-cmp',
+  'saadparwaiz1/cmp_luasnip',
+  'hrsh7th/cmp-nvim-lsp',
 
-	'folke/trouble.nvim',
+  'folke/trouble.nvim',
 
   'folke/zen-mode.nvim',
   'folke/twilight.nvim',
@@ -165,6 +175,31 @@ require('lazy').setup({
 vim.cmd [[colorscheme nightfly]]
 
 require('nvim-tree').setup()
+require('lualine').setup({
+  options = {
+    component_separators = '',
+    section_separators = { left = '', right = '' },
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'diagnostics'},
+    lualine_c = { {'filename', path = 1} },
+    lualine_x = {'searchcount', 'branch'},
+    lualine_y = {'diff'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = { 'filename' },
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = { 'location' },
+  },
+  tabline = {},
+  extensions = {},
+
+})
 require('autoclose').setup()
 
 require('go').setup()
