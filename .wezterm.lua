@@ -28,7 +28,7 @@ config.colors = {
 
 local a = wezterm.action
 
-config.leader = { key = "Space", mods = "CTRL", timeout = "300ms"  }
+config.leader = { key = "Space", mods = "CTRL", timeout = "200ms"  }
 config.keys = {
   { key = 'n', mods = 'LEADER', action = a.SpawnTab 'CurrentPaneDomain' },
   { key = 'h', mods = 'LEADER', action = a.ActivateTabRelative(-1) },
