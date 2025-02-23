@@ -96,7 +96,7 @@ inoremap('kj', '<esc>:w<cr>')
 -- TODO check if I can/should move this to plugin setup
 nnoremap('<F2>', ':NvimTreeToggle<cr>')
 nnoremap('<F3>', ':NvimTreeFindFileToggle<cr>')
-nnoremap('<F4>', ':CodeCompanionToggle<cr>')
+nnoremap('<F4>', ':CodeCompanionChat Toggle<cr>')
 
 leader('I', ':lua vim.diagnostic.open_float()<cr>')
 
@@ -347,6 +347,7 @@ vim.diagnostic.config({
 
 local trouble = require('trouble')
 trouble.setup({
+  auto_preview = false,
   auto_close = true,
 })
 
