@@ -352,17 +352,6 @@ trouble.setup({
 })
 
 require("codecompanion").setup({
-  adapters = {
-    ollama = function()
-      return require("codecompanion.adapters").use("ollama", {
-        schema = {
-          model = {
-            default = "deepseek-coder",
-          },
-        },
-      })
-    end,
-  },
   strategies = {
     chat = {
       adapter = "ollama",
@@ -387,7 +376,7 @@ vim.cmd 'iabbrev retunr return'
 vim.cmd 'iabbrev reutrn return'
 vim.cmd 'iabbrev fitler filter'
 
-vim.cmd 'cabbrev cc CodeCompletion'
+vim.cmd 'cabbrev cc CodeCompanion'
 
 
 -- autocmds
