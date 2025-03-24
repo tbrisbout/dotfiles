@@ -158,6 +158,12 @@ require('lazy').setup({
   'folke/twilight.nvim',
 
   {
+    'MeanderingProgrammer/render-markdown.nvim',
+    ft = { "markdown", "codecompanion" },
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+    opts = {},
+  },
+  {
     "olimorris/codecompanion.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
