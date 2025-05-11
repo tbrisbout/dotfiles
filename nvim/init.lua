@@ -451,8 +451,8 @@ local function run_prettier()
     filepath = filepath:gsub('%[', '\\[')
     filepath = filepath:gsub('%]', '\\]')
 
-    -- TODO make prettier path project based
-    vim.cmd('%!front/node_modules/.bin/prettier --stdin-filepath ' .. filepath)
+    local prettier = vim.env.PRETTIER_PATH or "./node_modules/.bin/prettier"
+    vim.cmd('%!' .. prettier .. ' --stdin-filepath ' .. filepath)
   end
 end
 
