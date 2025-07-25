@@ -211,7 +211,7 @@ require('autoclose').setup()
 require('go').setup()
 
 require('nvim-treesitter.configs').setup {
-	ensure_installed = { "go", "rust", "typescript", "javascript", "lua", "bash" },
+	ensure_installed = { "go", "gowork", "gosum", "gomod", "rust", "typescript", "javascript", "lua", "bash", "sql", "markdown", "yaml", "json", "comment" },
 	highlight = {
 		enable = true,
 	},
@@ -290,12 +290,10 @@ leader('K', telescope.grep_string)
 leader('reg', telescope.registers)
 leader('gor', telescope.lsp_dynamic_workspace_symbols)
 leader('goi', telescope.lsp_implementations)
+leader('god', telescope.treesitter)
 
 leader('vca', vim.lsp.buf.code_action)
 
--- TODO chose between the better use of map below
-leader('god', telescope.diagnostics)
--- leader('god', telescope.treesitter)
 
 local lspconfig = require 'lspconfig'
 
@@ -318,6 +316,7 @@ cmp.setup({
       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
 	sources = {
+		{ name = 'codecompanion' },
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
 	},
@@ -390,27 +389,21 @@ vim.cmd 'cabbrev cc CodeCompanion'
 
 local group_id = vim.api.nvim_create_augroup('my_autocommands', {})
 
--- run gofmt / ...
+local code_extensions = { "*.go", "*.rs", "*.ts", "*.tsx", "*.js", "*.jsx", "*.lua" }
+
+-- run formatters
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = group_id,
-  pattern = { "*.go", "*.rs" },
+  pattern = code_extensions,
   callback = function()
 	  vim.lsp.buf.format({ timeout_ms = 3000 })
-  end,
-})
-
-vim.api.nvim_create_autocmd("BufWritePre", {
-  group = group_id,
-  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
-  callback = function()
-    vim.cmd 'EslintFixAll'
   end,
 })
 
 -- show diagnostics in loclist after writing the file (like linting in ALE or Syntastic)
 vim.api.nvim_create_autocmd("BufWritePost", {
   group = group_id,
-  pattern = { "*.go", "*.rs", "*.ts", "*.tsx", "*.js", "*.jsx" },
+  pattern = code_extensions,
   callback = function()
     if not vim.tbl_isempty(vim.diagnostic.get(0)) then
       trouble.open('diagnostics')
