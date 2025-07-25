@@ -338,7 +338,16 @@ local common_lsp_config = {
 
 lspconfig.gopls.setup(common_lsp_config)
 lspconfig.rust_analyzer.setup(common_lsp_config)
-lspconfig.tsserver.setup(common_lsp_config)
+lspconfig.denols.setup({
+  on_attach = on_attach,
+  root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+})
+lspconfig.ts_ls.setup({
+  on_attach = on_attach,
+	capabilities = capabilities,
+  root_dir = lspconfig.util.root_pattern("package.json"),
+  single_file_support = false,
+})
 lspconfig.tailwindcss.setup(common_lsp_config)
 lspconfig.eslint.setup(common_lsp_config)
 lspconfig.bashls.setup(common_lsp_config)
