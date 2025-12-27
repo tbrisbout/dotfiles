@@ -38,6 +38,7 @@ vim.o.showcmd = false
 vim.o.showmode = false
 vim.o.ruler = false
 vim.o.splitbelow = true
+vim.o.splitright = true
 vim.o.expandtab = true
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
@@ -338,6 +339,18 @@ vim.lsp.config('ts_ls', {
   single_file_support = false,
 })
 
+vim.lsp.config('lua_ls', {
+  settings = {
+    Lua = {
+      runtime = { version = "LuaJIT" },
+      diagnostics = { globals = { "vim" } },
+      workspace = { library = vim.api.nvim_get_runtime_file("lua", true) },
+      telemetry = { enable = false },
+    }
+  }
+
+})
+
 vim.lsp.enable({
   'gopls',
   'rust_analyzer',
@@ -346,6 +359,7 @@ vim.lsp.enable({
   'tailwindcss',
   'eslint',
   'bashls',
+  'lua_ls',
 })
 
 -- global diagnostics behavior
