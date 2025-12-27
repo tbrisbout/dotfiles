@@ -1,0 +1,7 @@
+title = ""
+font-size = 18
+theme = "Catppuccin Macchiato"
+
+quick-terminal-position = right
+quick-terminal-size = 45%
+keybind = global:cmd+grave_accent=toggle_quick_terminal
