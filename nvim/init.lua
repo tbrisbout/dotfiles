@@ -295,8 +295,6 @@ leader('god', telescope.treesitter)
 leader('vca', vim.lsp.buf.code_action)
 
 
-local lspconfig = require 'lspconfig'
-
 require('nvim-lsp-installer').setup()
 
 local cmp = require 'cmp'
@@ -331,27 +329,25 @@ local function on_attach()
 	leader('gor', vim.lsp.buf.references, { buffer = true })
 end
 
-local common_lsp_config = {
-  on_attach = on_attach,
-	capabilities = capabilities,
-}
-
-lspconfig.gopls.setup(common_lsp_config)
-lspconfig.rust_analyzer.setup(common_lsp_config)
-lspconfig.denols.setup({
-  on_attach = on_attach,
-  root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
-})
-lspconfig.ts_ls.setup({
-  on_attach = on_attach,
-	capabilities = capabilities,
-  root_dir = lspconfig.util.root_pattern("package.json"),
+vim.lsp.config('denols', {
+  root_markers = { 'deno.json', 'deno.jsonc' },
   single_file_support = false,
 })
-lspconfig.tailwindcss.setup(common_lsp_config)
-lspconfig.eslint.setup(common_lsp_config)
-lspconfig.bashls.setup(common_lsp_config)
 
+vim.lsp.config('ts_ls', {
+  root_markers = { 'package.json' },
+  single_file_support = false,
+})
+
+vim.lsp.enable({
+  'gopls',
+  'rust_analyzer',
+  'denols',
+  'ts_ls',
+  'tailwindcss',
+  'eslint',
+  'bashls',
+})
 
 -- global diagnostics behavior
 vim.diagnostic.config({
