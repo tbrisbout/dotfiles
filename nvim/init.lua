@@ -53,15 +53,15 @@ vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 -- mappings
 
 local function nnoremap(lhs, rhs, options)
-	vim.keymap.set('n', lhs, rhs, options or { silent = true })
+  vim.keymap.set('n', lhs, rhs, options or { silent = true })
 end
 
 local function leader(lhs, rhs, options)
-	vim.keymap.set({'n', 'v'}, '<leader>'..lhs, rhs, options or { silent = true })
+  vim.keymap.set({ 'n', 'v' }, '<leader>' .. lhs, rhs, options or { silent = true })
 end
 
 local function inoremap(lhs, rhs, options)
-	vim.keymap.set('i', lhs, rhs, options or { silent = true })
+  vim.keymap.set('i', lhs, rhs, options or { silent = true })
 end
 
 nnoremap('<space>', '')
@@ -119,7 +119,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
   { 'nvim-treesitter/nvim-treesitter', cmd = 'TSUpdate' },
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "catppuccin/nvim",                 name = "catppuccin", priority = 1000 },
 
   'tpope/vim-commentary',
   'm4xshen/autoclose.nvim',
@@ -170,7 +170,7 @@ require('lazy').setup({
       "nvim-treesitter/nvim-treesitter",
       "nvim-telescope/telescope.nvim", -- Optional
       {
-        "stevearc/dressing.nvim", -- Optional: Improves the default Neovim UI
+        "stevearc/dressing.nvim",      -- Optional: Improves the default Neovim UI
         opts = {},
       },
     },
@@ -187,12 +187,12 @@ require('lualine').setup({
     section_separators = { left = '', right = '' },
   },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'diagnostics'},
-    lualine_c = { {'filename', path = 1} },
-    lualine_x = {'searchcount', 'branch'},
-    lualine_y = {'diff'},
-    lualine_z = {'location'}
+    lualine_a = { 'mode' },
+    lualine_b = { 'diagnostics' },
+    lualine_c = { { 'filename', path = 1 } },
+    lualine_x = { 'searchcount', 'branch' },
+    lualine_y = { 'diff' },
+    lualine_z = { 'location' }
   },
   inactive_sections = {
     lualine_a = {},
@@ -211,70 +211,70 @@ require('autoclose').setup()
 require('go').setup()
 
 require('nvim-treesitter.configs').setup {
-	ensure_installed = { "go", "gowork", "gosum", "gomod", "rust", "typescript", "javascript", "lua", "bash", "sql", "markdown", "yaml", "json", "comment" },
-	highlight = {
-		enable = true,
-	},
+  ensure_installed = { "go", "gowork", "gosum", "gomod", "rust", "typescript", "javascript", "lua", "bash", "sql", "markdown", "yaml", "json", "comment" },
+  highlight = {
+    enable = true,
+  },
 }
 
 require('gitsigns').setup({
-	on_attach = function(bufnr)
-		-- check this pattern
-	  local gs = package.loaded.gitsigns
+  on_attach = function(bufnr)
+    -- check this pattern
+    local gs = package.loaded.gitsigns
 
-		leader('gn', gs.next_hunk, { buffer = bufnr })
-		leader('gp', gs.prev_hunk, { buffer = bufnr })
-		leader('gr', gs.reset_hunk, { buffer = bufnr })
-	end
+    leader('gn', gs.next_hunk, { buffer = bufnr })
+    leader('gp', gs.prev_hunk, { buffer = bufnr })
+    leader('gr', gs.reset_hunk, { buffer = bufnr })
+  end
 })
 
 local ts_actions = require 'telescope.actions'
 
 require('telescope').setup {
-	defaults = {
-		prompt_prefix = ' ',
-		layout_config = {
-			horizontal = {
-				prompt_position = 'top',
-				height = 0.5,
-				preview_cutoff = 120,
-			},
-		},
-		mappings = {
-			i = {
-				["<esc>"] = ts_actions.close,
-				["<C-K>"] = ts_actions.move_selection_previous,
-				["<C-I>"] = ts_actions.move_selection_next,
-			},
-		},
-	},
+  defaults = {
+    prompt_prefix = ' ',
+    layout_config = {
+      horizontal = {
+        prompt_position = 'top',
+        height = 0.5,
+        preview_cutoff = 120,
+      },
+    },
+    mappings = {
+      i = {
+        ["<esc>"] = ts_actions.close,
+        ["<C-K>"] = ts_actions.move_selection_previous,
+        ["<C-I>"] = ts_actions.move_selection_next,
+      },
+    },
+  },
 }
 
 local telescope = require 'telescope.builtin'
 
 local function find_in_folder()
-	telescope.find_files({ cwd = vim.fn.expand('%:p:h') })
+  telescope.find_files({ cwd = vim.fn.expand('%:p:h') })
 end
 
 local function open_alternate_file()
-	-- TODO support other patterns than `_test`
-	local alternate_pattern = "_test"
+  -- TODO support other patterns than `_test`
+  local alternate_pattern = "_test"
 
-	local file_extension = "." .. vim.fn.expand("%:e")
+  local file_extension = "." .. vim.fn.expand("%:e")
   local file_base_name = vim.fn.expand("%:r")
 
-	local alternate_file
-	if vim.endswith(file_base_name, alternate_pattern) then
-		alternate_file = file_base_name:sub(1, -#alternate_pattern - 1) .. file_extension
-	else
-		alternate_file = file_base_name .. alternate_pattern .. file_extension
-	end
+  local alternate_file
+  if vim.endswith(file_base_name, alternate_pattern) then
+    alternate_file = file_base_name:sub(1, - #alternate_pattern - 1) .. file_extension
+  else
+    alternate_file = file_base_name .. alternate_pattern .. file_extension
+  end
 
-	vim.cmd("edit " .. alternate_file)
+  vim.cmd("edit " .. alternate_file)
 end
 
 local function show_buffers()
-	telescope.buffers { ignore_current_buffer = true, sort_mru = true }
+  telescope.buffers { ignore_current_buffer = true, sort_mru = true }
 end
 
 leader('s', open_alternate_file)
@@ -301,32 +301,32 @@ local cmp = require 'cmp'
 local ls = require 'luasnip'
 
 cmp.setup({
-	snippet = {
-		expand = function(args)
-			ls.lsp_expand(args.body)
-		end
-	},
-	mapping = cmp.mapping.preset.insert({
-      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-e>'] = cmp.mapping.abort(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    }),
-	sources = {
-		{ name = 'codecompanion' },
-		{ name = 'nvim_lsp' },
-		{ name = 'luasnip' },
-	},
+  snippet = {
+    expand = function(args)
+      ls.lsp_expand(args.body)
+    end
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  }),
+  sources = {
+    { name = 'codecompanion' },
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+  },
 })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local function on_attach()
-	nnoremap('K', vim.lsp.buf.hover, { buffer = true })
-	nnoremap('<C-]>', vim.lsp.buf.definition, { buffer = true })
-	leader('gd', vim.lsp.buf.definition, { buffer = true })
-	leader('gor', vim.lsp.buf.references, { buffer = true })
+  nnoremap('K', vim.lsp.buf.hover, { buffer = true })
+  nnoremap('<C-]>', vim.lsp.buf.definition, { buffer = true })
+  leader('gd', vim.lsp.buf.definition, { buffer = true })
+  leader('gor', vim.lsp.buf.references, { buffer = true })
 end
 
 vim.lsp.config('denols', {
@@ -414,7 +414,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   group = group_id,
   pattern = code_extensions,
   callback = function()
-	  vim.lsp.buf.format({ timeout_ms = 3000 })
+    vim.lsp.buf.format({ timeout_ms = 3000 })
   end,
 })
 
@@ -432,22 +432,22 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 -- run goimports
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = group_id,
-	pattern = { "*.go" },
-	callback = function()
-		local params = vim.lsp.util.make_range_params(nil, vim.lsp.util._get_offset_encoding())
-		params.context = {only = {"source.organizeImports"}}
+  pattern = { "*.go" },
+  callback = function()
+    local params = vim.lsp.util.make_range_params(nil, vim.lsp.util._get_offset_encoding())
+    params.context = { only = { "source.organizeImports" } }
 
-		local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 3000)
-		for _, res in pairs(result or {}) do
-			for _, r in pairs(res.result or {}) do
-				if r.edit then
-					vim.lsp.util.apply_workspace_edit(r.edit, vim.lsp.util._get_offset_encoding())
-				else
-					vim.lsp.buf.execute_command(r.command)
-				end
-			end
-		end
-	end,
+    local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 3000)
+    for _, res in pairs(result or {}) do
+      for _, r in pairs(res.result or {}) do
+        if r.edit then
+          vim.lsp.util.apply_workspace_edit(r.edit, vim.lsp.util._get_offset_encoding())
+        else
+          vim.lsp.buf.execute_command(r.command)
+        end
+      end
+    end
+  end,
 })
 
 local js_ts_file_types = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' }
@@ -471,8 +471,8 @@ leader("ff", run_prettier)
 
 -- TODO improve the function for other filetypes
 local function run_tests()
-	if vim.bo.filetype == 'go' then
-		vim.cmd [[
+  if vim.bo.filetype == 'go' then
+    vim.cmd [[
 		terminal go test -v %:p:h | sed ''/PASS/s//$(printf "\033[32mPASS\033[0m")/'' | sed ''/FAIL/s//$(printf "\033[31mFAIL\033[0m")/''
 		]]
   elseif vim.tbl_contains(js_ts_file_types, vim.bo.filetype) then
@@ -480,7 +480,7 @@ local function run_tests()
     vim.cmd [[
     terminal npm test --silent -- --bail --watchAll=false %:p:h
     ]]
-	end
+  end
 end
 
 leader('t', run_tests)
@@ -491,7 +491,7 @@ ls.config.set_config {
   updateevents = "TextChanged,TextChangedI"
 }
 
-require("luasnip.loaders.from_lua").load({paths = "./snippets"})
+require("luasnip.loaders.from_lua").load({ paths = "./snippets" })
 
 -- jump to editable fields
 vim.keymap.set({ "i", "s" }, "<c-k>", function()
