@@ -118,8 +118,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
   { 'nvim-treesitter/nvim-treesitter', cmd = 'TSUpdate' },
-  'shaunsingh/nord.nvim',
-  'bluz71/vim-nightfly-colors',
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 
   'tpope/vim-commentary',
   'm4xshen/autoclose.nvim',
@@ -178,7 +177,7 @@ require('lazy').setup({
   }
 })
 
-vim.cmd [[colorscheme nightfly]]
+vim.cmd [[colorscheme catppuccin]]
 
 require('nvim-tree').setup()
 require('lualine').setup({
